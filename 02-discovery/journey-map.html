@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomi Journey Map</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d1d1f;--muted:#6b6f74;--line:#dcd9d0;--accent:#1f6f5c;--accent-soft:#e3f1ec;--old:#a4442f;--old-soft:#f6e7e3;--band:#efeee8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0f10;--card:#151617;--ink:#ececec;--muted:#9a9ea3;--line:#2c2f33;--accent:#5cc4a6;--accent-soft:#1a2f29;--old:#e08a76;--old-soft:#2e1d19;--band:#1b1d1f}}
+:root[data-theme="dark"]{--bg:#0e0f10;--card:#151617;--ink:#ececec;--muted:#9a9ea3;--line:#2c2f33;--accent:#5cc4a6;--accent-soft:#1a2f29;--old:#e08a76;--old-soft:#2e1d19;--band:#1b1d1f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:1320px;margin:0 auto;padding:36px 16px 48px}
+h1{font-size:34px;letter-spacing:-.02em;margin:0 0 8px}
+.sub{color:var(--muted);font-size:16px;margin:0 0 24px;max-width:900px}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:1180px;table-layout:fixed}
+col.lab{width:130px}
+th,td{padding:12px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td+td,th+td,td+th,th+th{border-left:1px solid var(--line)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+.mono{font:600 11px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
+thead tr.stage th{background:var(--band);color:var(--accent);text-align:center;padding:10px}
+thead tr.step th{color:var(--muted);padding:14px 12px}
+tbody th{color:var(--muted);vertical-align:middle}
+.arrow{color:var(--accent);font-weight:700}
+.who{font-weight:600}
+tr.today td{background:var(--old-soft)}
+tr.today th{background:var(--old-soft);color:var(--old)}
+tr.gap td{font-weight:600;color:var(--accent);background:var(--accent-soft)}
+tr.gap th{background:var(--accent-soft);color:var(--accent)}
+.src{color:var(--muted);font-size:11px;font-weight:400}
+.flag{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+h2{font-size:18px;margin:32px 0 12px}
+.adv{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.adv div{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.adv b{display:block;margin-bottom:4px}
+.note{color:var(--muted);font-size:13px;margin-top:24px}
+@media (max-width:760px){.adv{grid-template-columns:1fr}h1{font-size:26px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Nomi's future-state journey map</h1>
+<p class="sub">Three personas: the loan officer, her referral partner, and the lender's compliance team. Scope: the partner's "send me something," through the compliance audit. Strategy: Strip &amp; accelerate. Target: partner has the piece in under 15 minutes.</p>
+
+<div class="wrap">
+<table>
+<colgroup><col class="lab"><col><col><col><col><col><col><col><col></colgroup>
+<thead>
+<tr class="stage"><th></th>
+<th class="mono" colspan="2">1 · Capture</th>
+<th class="mono" colspan="2">2 · Create</th>
+<th class="mono" colspan="2">3 · Finalize</th>
+<th class="mono" colspan="2">4 · Deliver &amp; audit</th></tr>
+<tr class="step"><th></th>
+<th class="mono">Ask</th><th class="mono">Request</th>
+<th class="mono">Clarify</th><th class="mono">Review</th>
+<th class="mono">Refine</th><th class="mono">Clear</th>
+<th class="mono">Receive</th><th class="mono">Audit</th></tr>
+</thead>
+<tbody>
+<tr><th class="mono">Persona</th>
+<td class="who">LO</td><td class="who">LO</td><td class="who">LO</td><td class="who">LO</td><td class="who">LO</td><td class="who">LO + Nomi</td><td class="who">Partner</td><td class="who">Compliance</td></tr>
+<tr><th class="mono">Action → benefit</th>
+<td>Partner says "send me something" <span class="arrow">→</span> the door is open</td>
+<td>Opens Nomi, types "I need an open house flyer," tags partner <span class="arrow">→</span> no form</td>
+<td>Answers a few conversational questions <span class="arrow">→</span> brief done in under 3 minutes</td>
+<td>Sees first design, her preferences and compliance applied <span class="arrow">→</span> nothing to fix</td>
+<td>Asks for edits in plain words, confirms final <span class="arrow">→</span> she controls the result</td>
+<td>No flags fire <span class="arrow">→</span> no human approval; logged and queued for 10% audit<span class="flag">If a flag fires, a human reviews before release.</span></td>
+<td>Gets a personalized, accurate, compliant piece in under 15 minutes <span class="arrow">→</span> trusts the LO</td>
+<td>Receives audit log and every final asset <span class="arrow">→</span> samples 10%, examiner-ready</td></tr>
+<tr><th class="mono">Touchpoint</th>
+<td>Call, text, open house</td><td>Nomi chat</td><td>Nomi chat</td><td>Design preview</td><td>Chat + preview</td><td>Compliance engine, record queue</td><td>Text or email</td><td>Audit log</td></tr>
+<tr><th class="mono">Thought</th>
+<td>"I need to send her something today."</td><td>"That's all I have to type?"</td><td>"It asks what a designer would."</td><td>"This looks like mine."</td><td>"That's exactly it."</td><td>"It's already cleared?"</td><td>"She made this for my listing."</td><td>"I can see everything that went out."</td></tr>
+<tr><th class="mono">Internal state</th>
+<td>Urgent</td><td>Relieved</td><td>Engaged</td><td>Confident</td><td>In control</td><td>Safe</td><td>Impressed</td><td>Assured</td></tr>
+<tr class="today"><th class="mono">Today</th>
+<td>Waits a week, DIYs, or sends nothing</td>
+<td>Request form; many don't know it exists</td>
+<td>1.8-day brief, 2.3 clarifying messages <span class="src">(Sim.)</span></td>
+<td>Same 9 of 140 templates, or Canva DIY <span class="src">(Sim.)</span></td>
+<td>Revision rounds; 38% of tickets returned <span class="src">(Sim.)</span></td>
+<td>1.9-day review; DIY skips it entirely <span class="src">(Sim.)</span></td>
+<td>6.5-day median, or a generic flyer <span class="src">(Sim.)</span></td>
+<td>No view of shadow assets; 37% violate rules <span class="src">(Sim.)</span></td></tr>
+<tr class="gap"><th class="mono">Pain point addressed</th>
+<td>Lost moment</td><td>Hidden, heavy intake</td><td>Slow brief</td><td>Generic look, missing disclosures</td><td>Rework loops</td><td>Review bottleneck</td><td>Late, generic delivery</td><td>No visibility</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>3 competitive advantages over the manual workaround</h2>
+<section class="adv">
+<div><b>1 · Faster than the queue, safer than DIY</b>Under 15 minutes with disclosures built in, versus a 6.5-day median or a 37% violation rate. <span class="src">(Simulated)</span></div>
+<div><b>2 · Looks like hers, not the bank's</b>Synced to her preferences and tagged to the partner, so no two LOs send the same flyer.</div>
+<div><b>3 · Compliance sees everything</b>Every asset is logged and 10% sampled. Canva and ChatGPT pieces leave no record.</div>
+</section>
+
+<p class="note">Evidence is from the Harborline discovery dataset (Simulated course data). Nomi timings are design targets, not measured results.</p>
+</main>
+</body>
+</html>
