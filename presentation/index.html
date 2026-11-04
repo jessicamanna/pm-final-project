@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomi · Final presentation</title>
+<meta name="description" content="Nomi: compliant collateral before the door closes. Product Management Foundations final project by Jessica Manna.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F2A3D; --navy-2:#1B3B52; --navy-3:#24485F;
+  --coral:#FF5A36; --paper:#F5F1EA; --green:#1F7A62; --slate:#56677A; --white:#FFFFFF;
+  --line:#E3DDD2; --line-2:#D8D0C2;
+  --paper-80:rgba(245,241,234,.80); --paper-60:rgba(245,241,234,.60); --paper-35:rgba(245,241,234,.35); --paper-14:rgba(245,241,234,.14);
+  --display:"Inter Display","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --text:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--navy);overflow:hidden}
+body{font-family:var(--text);color:var(--navy);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;font-optical-sizing:auto}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-underline-offset:4px}
+a:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:4px}
+
+/* ---------- stage: fixed 1920x1080 artboard scaled to the window ---------- */
+.stage{position:fixed;inset:0}
+.deck{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center}
+.slide{position:absolute;inset:0;padding:132px 120px 84px;display:none;overflow:hidden}
+.slide.active{display:block}
+.slide.paper{background:var(--paper);color:var(--navy)}
+.slide.navy{background:var(--navy);color:var(--paper)}
+
+/* ---------- chapter rail ---------- */
+.rail{position:absolute;top:48px;left:120px;right:120px;display:flex;align-items:center;gap:36px;
+  font:600 16px/1 var(--text);letter-spacing:.12em;text-transform:uppercase}
+.rail span{color:var(--slate);opacity:.62;display:flex;align-items:center;gap:10px}
+.rail span.on{opacity:1;color:var(--navy)}
+.rail span.on::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--coral)}
+.rail .mod{margin-left:auto;opacity:1;letter-spacing:.04em;text-transform:none;font-weight:500;font-size:18px}
+.navy .rail span{color:var(--paper-60);opacity:.75}
+.navy .rail span.on{color:var(--paper);opacity:1}
+.navy .rail .mod{color:var(--paper-60)}
+.pageno{position:absolute;right:120px;bottom:40px;font:500 18px/1 var(--text);color:var(--slate)}
+.navy .pageno{color:var(--paper-60)}
+
+/* ---------- type ---------- */
+h1{font:600 64px/1.08 var(--display);letter-spacing:-.01em;max-width:1500px;text-wrap:balance}
+.lead{font:400 30px/1.4 var(--text);max-width:1240px;color:var(--slate);margin-top:20px;text-wrap:pretty}
+.navy .lead{color:var(--paper-80)}
+.label{display:block;font:600 16px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.navy .label{color:var(--paper-60)}
+.source{position:absolute;left:120px;bottom:38px;max-width:1440px;font:400 17px/1.4 var(--text);color:var(--slate)}
+.navy .source{color:var(--paper-60)}
+
+/* ---------- shared pieces ---------- */
+.bubble{position:relative;border-radius:44px;padding:44px 52px 48px;font-family:var(--display);font-weight:600;letter-spacing:-.01em}
+.bubble::after{content:"";position:absolute;left:64px;bottom:-30px;width:60px;height:60px;background:inherit;clip-path:polygon(0 0,100% 0,0 100%)}
+.signal{position:absolute;border-radius:50%;background:var(--coral)}
+.arch{width:300px;height:360px;border-radius:150px 150px 28px 28px;background:var(--white);overflow:hidden;display:flex;align-items:flex-end;justify-content:center;box-shadow:inset 0 0 0 2px var(--line)}
+.arch img{width:300px;height:300px}
+.stats{display:flex;flex-direction:column;padding-top:6px}
+.stat{padding:22px 0 24px;border-top:1px solid var(--line-2)}
+.stat:first-child{border-top:0;padding-top:0}
+.stat b{display:block;font:600 76px/1 var(--display);letter-spacing:-.01em}
+.stat span{display:block;margin-top:10px;font:400 22px/1.38 var(--text);color:var(--slate)}
+
+/* ===================== 1 · cover ===================== */
+#cover{padding:0}
+#cover .wm{position:absolute;left:120px;top:112px;width:250px}
+#cover .wm svg{width:100%;height:auto;display:block}
+#cover h1{position:absolute;left:120px;top:356px;max-width:1040px;font-size:100px;line-height:1.02;color:var(--paper)}
+#cover .by{position:absolute;left:120px;top:742px;font:500 32px/1.3 var(--display);color:var(--paper)}
+#cover .by span{display:block;font:400 25px/1.4 var(--text);color:var(--paper-60);margin-top:6px}
+#cover .tag{position:absolute;left:120px;bottom:96px;font:500 26px/1 var(--text);color:var(--paper-60)}
+.ugc{position:absolute;right:150px;top:110px;width:486px;height:864px;border-radius:243px 243px 36px 36px;background:var(--navy-2);overflow:hidden}
+.ugc video{width:100%;height:100%;object-fit:cover;cursor:pointer}
+.ugc .play{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;appearance:none;border:0;border-radius:999px;padding:16px 26px 16px 18px;background:var(--coral);color:var(--navy);font:600 22px/1 var(--text);cursor:pointer;box-shadow:0 10px 30px rgba(15,42,61,.35);white-space:nowrap}
+.ugc .play i{width:40px;height:40px;border-radius:50%;background:var(--navy);position:relative;flex:none}
+.ugc .play i::after{content:"";position:absolute;left:15px;top:11px;border-left:15px solid var(--paper);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.ugc .play:hover{filter:brightness(1.06)}
+.ugc .play:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+.ugc.playing .play{display:none}
+.ugc .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;color:var(--paper-60);font:500 24px/1.35 var(--text);text-align:center;padding:0 60px}
+.ugc .ph i{width:96px;height:96px;border-radius:50%;box-shadow:inset 0 0 0 3px var(--paper-35);position:relative}
+.ugc .ph i::after{content:"";position:absolute;left:38px;top:30px;border-left:30px solid var(--paper-60);border-top:18px solid transparent;border-bottom:18px solid transparent}
+#cover .ugc-dot{width:44px;height:44px;right:166px;top:118px}
+
+/* ===================== 2 · the moment ===================== */
+#moment h1{color:var(--paper);max-width:1460px}
+.moment{position:absolute;left:120px;right:120px;top:352px;height:560px}
+.moment .ask{position:absolute;left:0;top:30px;width:620px}
+.moment .bubble{background:var(--white);color:var(--navy);font-size:84px;line-height:1;padding:52px 56px 58px}
+.moment .bubble .signal{width:46px;height:46px;right:-14px;top:-14px}
+.moment .who{margin-top:56px;font:500 24px/1.35 var(--text);color:var(--paper-80);padding-left:6px}
+.moment svg.branch{position:absolute;left:600px;top:0;width:236px;height:560px;overflow:visible}
+.moment .paths{position:absolute;left:876px;right:0;top:0;height:560px;display:grid;grid-template-rows:repeat(3,1fr)}
+.path{border-top:1px solid var(--paper-14);padding:22px 0 0}
+.path:last-child{border-bottom:1px solid var(--paper-14)}
+.path .row{display:grid;grid-template-columns:1fr 330px;column-gap:40px;margin-top:12px;align-items:start}
+.path h3{font:600 32px/1.2 var(--display);letter-spacing:-.005em;color:var(--paper)}
+.path p{font:400 23px/1.4 var(--text);color:var(--paper-80)}
+.path .result{font:400 21px/1.35 var(--text);color:var(--paper-80);padding-left:22px;border-left:2px solid var(--paper-35)}
+.path .result b{display:block;font:600 24px/1.25 var(--display);color:var(--paper);margin-bottom:4px}
+#moment .source{font-size:22px;color:var(--paper-80);bottom:44px;max-width:1300px}
+
+/* ===================== 3 · crisis ===================== */
+.crisis{position:absolute;left:120px;right:120px;top:376px;display:grid;grid-template-columns:repeat(4,1fr);column-gap:56px}
+.crisis .c{border-top:3px solid var(--navy);padding-top:28px}
+.crisis b{display:block;font:600 96px/1 var(--display);letter-spacing:-.02em}
+.crisis b small{font-size:52px;letter-spacing:-.01em}
+.crisis p{font:400 22px/1.42 var(--text);color:var(--slate);margin-top:18px}
+.bars{margin-top:26px;display:flex;flex-direction:column;gap:9px}
+.bar{position:relative;height:16px;border-radius:8px;background:var(--line)}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:8px;background:var(--navy)}
+.bar.dim i{background:var(--slate);opacity:.55}
+.bar-l{font:500 16px/1 var(--text);color:var(--slate);margin:2px 0 4px}
+.after{position:absolute;left:120px;right:120px;top:842px;display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.after p{font:500 26px/1.38 var(--display);padding-left:26px;border-left:3px solid var(--line-2)}
+
+/* ===================== 4 · hook ===================== */
+#hook .statement{font:600 76px/1.06 var(--display);letter-spacing:-.015em;max-width:1560px;margin-top:22px;text-wrap:balance}
+#hook .setup{font:400 28px/1.42 var(--text);color:var(--slate);max-width:1320px;margin-top:30px}
+.vp{position:absolute;left:120px;right:120px;top:640px;display:grid;grid-template-columns:1.15fr 1fr;column-gap:56px}
+.vp .card{background:var(--navy);color:var(--paper);border-radius:28px;padding:36px 40px 40px}
+.vp .card p{font:500 30px/1.36 var(--display);margin-top:18px}
+.risks li{list-style:none;font:500 25px/1.32 var(--display);padding:14px 0 14px 34px;border-top:1px solid var(--line-2);position:relative}
+.risks li::before{content:"";position:absolute;left:4px;top:26px;width:12px;height:12px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--navy)}
+.risks li:first-child{border-top:0}
+.risks .note{font:400 20px/1.4 var(--text);color:var(--slate);margin-top:10px}
+
+/* ===================== 5 · persona ===================== */
+.persona{display:grid;grid-template-columns:420px 1fr 470px;column-gap:72px;height:100%;align-items:start}
+.persona .who{padding-top:6px}
+.persona h1{font-size:64px;margin-top:40px}
+.persona .role{font:500 30px/1.25 var(--display);color:var(--slate);margin-top:10px}
+.persona .tags{margin-top:28px;font:400 22px/1.5 var(--text);color:var(--navy)}
+.persona .voice{padding-top:20px}
+.persona .bubble{background:var(--navy);color:var(--paper);font-size:58px;line-height:1.1}
+.persona .attr{margin:58px 0 0 6px;font:400 22px/1.4 var(--text);color:var(--slate);max-width:640px}
+.persona .jtbd{margin-top:64px;padding-top:28px;border-top:2px solid var(--navy)}
+.persona .jtbd p{font:500 30px/1.36 var(--display);margin-top:16px;max-width:760px;text-wrap:pretty}
+
+/* ===================== 6 · journey ===================== */
+.journey{position:absolute;left:120px;right:120px;top:292px}
+.emo{position:relative;height:120px}
+.emo svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.emo .w{position:absolute;font:500 19px/1 var(--text);color:var(--slate);transform:translate(-50%,0);white-space:nowrap}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px;margin-top:18px}
+.stages>div{display:flex;flex-direction:column}
+.stage-h{font:600 30px/1.1 var(--display);padding-bottom:14px;border-bottom:3px solid var(--navy);display:flex;justify-content:space-between;align-items:baseline}
+.stage-h small{font:600 18px/1 var(--text);color:var(--slate)}
+.today{margin-top:16px;padding:18px 20px 20px;border-radius:18px;box-shadow:inset 0 0 0 2px var(--line-2)}
+.today .label,.nomi .label{font-size:14px;margin-bottom:10px}
+.today p{font:400 20px/1.38 var(--text);color:var(--slate)}
+.nomi{margin-top:12px;padding:18px 20px 22px;border-radius:18px;background:var(--navy);color:var(--paper);flex:1}
+.nomi .label{color:var(--paper-60)}
+.nomi p{font:500 21px/1.38 var(--text)}
+.adv{position:absolute;left:120px;right:120px;top:890px;display:grid;grid-template-columns:230px 1fr 1fr 1fr;column-gap:36px;align-items:start}
+.adv .label{padding-top:4px;line-height:1.35}
+.adv b{display:block;font:600 22px/1.25 var(--display)}
+.adv span{display:block;font:400 18px/1.38 var(--text);color:var(--slate);margin-top:4px}
+
+/* ===================== 7 · hypothesis ===================== */
+.hyp-top{display:flex;align-items:flex-end;gap:56px;margin-top:4px}
+.hyp-top .big{font:600 168px/.9 var(--display);letter-spacing:-.03em;white-space:nowrap}
+.hyp-top .big span{color:var(--slate);opacity:.55}
+.hyp-top p{font:400 28px/1.38 var(--text);color:var(--slate);max-width:640px;padding-bottom:10px}
+.track{position:absolute;left:120px;right:120px;top:384px;height:120px}
+.track .base{position:absolute;left:0;right:0;top:44px;height:22px;border-radius:11px;background:var(--line)}
+.track .now{position:absolute;left:0;width:14%;top:44px;height:22px;border-radius:11px;background:var(--slate)}
+.track .goal{position:absolute;left:14%;width:46%;top:44px;height:22px;border-radius:0 11px 11px 0;background:repeating-linear-gradient(90deg,var(--navy) 0 14px,transparent 14px 22px)}
+.track .tick{position:absolute;top:0;transform:translateX(-50%);text-align:center;font:500 18px/1.25 var(--text);color:var(--slate);white-space:nowrap}
+.track .tick::after{content:"";display:block;width:2px;height:30px;background:var(--navy);margin:8px auto 0}
+.track .tick.down{top:76px}
+.track .tick.down::after{display:none}
+.track .tick.down::before{content:"";display:block;width:2px;height:22px;background:var(--navy);margin:0 auto 8px}
+.track .t60{left:60%;font-weight:600;color:var(--navy)}
+.track .dot60{position:absolute;left:60%;top:39px;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 6px var(--paper)}
+.formula{position:absolute;left:120px;right:120px;top:588px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.formula div{background:var(--white);border-radius:20px;padding:22px 26px 24px;box-shadow:inset 0 0 0 2px var(--line)}
+.formula .label{font-size:14px}
+.formula p{font:500 22px/1.36 var(--text);margin-top:12px}
+.formula div.key{background:var(--navy);color:var(--paper);box-shadow:none}
+.formula div.key .label{color:var(--paper-60)}
+
+/* ===================== 8 · roadmap ===================== */
+#roadmap .lead{margin-top:14px;font-size:27px;max-width:1680px}
+.board{position:absolute;left:120px;right:120px;top:292px;height:598px;display:grid;grid-template-columns:1.32fr 1fr 1fr .86fr;gap:20px}
+.lane{border-radius:22px;padding:22px 20px 20px;display:flex;flex-direction:column;gap:10px;background:var(--white);box-shadow:inset 0 0 0 2px var(--line)}
+.lane header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.lane h3{font:600 32px/1 var(--display);letter-spacing:-.01em}
+.lane header span{font:500 18px/1 var(--text);color:var(--slate)}
+.lane.now{background:var(--navy);color:var(--paper);box-shadow:none}
+.lane.now header span{color:var(--paper-60)}
+.lane.cut{background:transparent;box-shadow:inset 0 0 0 2px var(--line-2)}
+.feat{display:block;padding:10px 14px 12px;border-radius:14px;background:var(--paper)}
+.feat .meta{display:flex;justify-content:space-between;align-items:baseline}
+.now .feat{background:var(--navy-2)}
+.cut .feat{background:transparent;padding:10px 4px}
+.feat .id{font:600 17px/1.2 var(--text);color:var(--slate)}
+.now .feat .id{color:var(--paper-60)}
+.feat .nm{display:block;font:600 22px/1.2 var(--display);letter-spacing:-.005em;margin-top:3px}
+.feat .why{display:block;font:400 17px/1.32 var(--text);color:var(--slate);margin-top:3px}
+.now .feat .why{color:var(--paper-80)}
+.cut .feat .nm{color:var(--slate)}
+.feat .ve{font:500 16px/1.2 var(--text);color:var(--slate);white-space:nowrap}
+.now .feat .ve{color:var(--paper-60)}
+.feat.n2{position:relative;box-shadow:inset 0 0 0 2px var(--coral)}
+.override{position:absolute;left:120px;right:120px;top:914px;display:grid;grid-template-columns:auto 1fr;column-gap:22px;align-items:start}
+.override .dot{width:16px;height:16px;border-radius:50%;background:var(--coral);margin-top:8px}
+.override p{font:400 22px/1.4 var(--text);max-width:1640px}
+.override p b{font-weight:600}
+#roadmap .source{bottom:34px}
+
+/* ===================== 9 · prototype ===================== */
+.demo{position:absolute;left:200px;top:132px;width:450px;height:800px;border-radius:40px;overflow:hidden;background:var(--paper);box-shadow:0 0 0 10px var(--navy-2)}
+.demo video,.demo img{width:100%;height:100%;object-fit:cover}
+.proto{position:absolute;left:780px;right:120px;top:140px}
+.proto h1{color:var(--paper);font-size:60px;max-width:1000px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1px solid var(--paper-35)}
+.flow div{padding:22px 22px 0 0}
+.flow b{display:flex;align-items:center;gap:12px;font:600 26px/1.1 var(--display);color:var(--paper)}
+.flow b i{font-style:normal;width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--paper-60);display:grid;place-items:center;font:600 17px/1 var(--text);color:var(--paper-80)}
+.flow p{font:400 20px/1.4 var(--text);color:var(--paper-80);margin-top:12px}
+.decision{margin-top:46px;background:var(--paper);color:var(--navy);border-radius:24px;padding:28px 34px 30px;display:grid;grid-template-columns:auto 1fr;column-gap:22px}
+.decision .dot{width:18px;height:18px;border-radius:50%;background:var(--coral);margin-top:10px}
+.decision p{font:600 30px/1.3 var(--display)}
+.decision span{display:block;font:400 21px/1.4 var(--text);color:var(--slate);margin-top:8px}
+.evals{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;margin-top:40px}
+.evals p{font:400 21px/1.42 var(--text);color:var(--paper-80)}
+.evals p b{display:block;font:600 22px/1.3 var(--display);color:var(--paper);margin-bottom:6px}
+#proto .source a{color:var(--paper)}
+
+/* ===================== 10 · meet nomi ===================== */
+.chat{position:absolute;left:120px;top:150px;width:800px;display:flex;flex-direction:column;gap:18px}
+.msg{display:flex;gap:16px;align-items:flex-end}
+.msg .av{flex:none;width:58px;height:58px;border-radius:50%;background:var(--navy);display:grid;place-items:center}
+.msg .av svg{width:30px;height:auto}
+.msg .b{border-radius:28px 28px 28px 8px;background:var(--white);box-shadow:inset 0 0 0 2px var(--line);padding:20px 26px;font:400 25px/1.38 var(--text);max-width:700px}
+.msg .b small{display:block;font:600 14px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:10px}
+.msg.me{justify-content:flex-end}
+.msg.me .b{background:var(--navy);color:var(--paper);box-shadow:none;border-radius:28px 28px 8px 28px;font-weight:500}
+.persona-copy{position:absolute;left:1000px;right:120px;top:150px}
+.persona-copy h1{font-size:52px;line-height:1.1;max-width:800px}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:26px 40px;margin-top:40px}
+.traits b{display:block;font:600 26px/1.2 var(--display)}
+.traits span{display:block;font:400 20px/1.4 var(--text);color:var(--slate);margin-top:6px}
+.guard{margin-top:40px;padding:24px 28px;border-radius:20px;background:var(--navy);color:var(--paper)}
+.guard b{font:600 24px/1.3 var(--display)}
+.guard span{display:block;font:400 20px/1.4 var(--text);color:var(--paper-80);margin-top:6px}
+.swatches{position:absolute;left:1000px;right:120px;bottom:92px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.swatches div{font:500 16px/1.3 var(--text);color:var(--slate)}
+.swatches i{display:block;height:44px;border-radius:12px;margin-bottom:10px}
+
+/* ===================== 11 · experiment ===================== */
+.split{position:absolute;left:120px;top:322px;width:840px}
+.groups{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+.group .dots{display:grid;grid-template-columns:repeat(5,56px);gap:16px;margin-top:22px}
+.group .dots i{width:56px;height:56px;border-radius:50%}
+.group.v .dots i{background:var(--navy)}
+.group.c .dots i{box-shadow:inset 0 0 0 3px var(--slate)}
+.group b{display:block;font:600 30px/1.15 var(--display)}
+.group span{display:block;font:400 20px/1.4 var(--text);color:var(--slate);margin-top:6px}
+.days{margin-top:50px;position:relative;height:110px}
+.days .line{position:absolute;left:0;right:0;top:11px;height:3px;background:var(--navy)}
+.days .pt{position:absolute;top:0;padding-top:42px;font:500 19px/1.35 var(--text);color:var(--slate)}
+.days .pt b{display:block;font:600 22px/1.2 var(--display);color:var(--navy);margin-top:4px}
+.days .pt::before{content:"";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 3px var(--navy)}
+.days .p90{right:0;text-align:right}
+.days .p90::before{left:auto;right:0;background:var(--navy)}
+.nums{position:absolute;left:1040px;right:120px;top:322px;display:grid;grid-template-columns:1fr 1fr;gap:30px 40px}
+.nums b{display:block;font:600 64px/1 var(--display);letter-spacing:-.02em}
+.nums span{display:block;font:400 20px/1.4 var(--text);color:var(--slate);margin-top:10px}
+.why-not{position:absolute;left:120px;right:120px;top:796px;display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:40px}
+.why-not div{border-top:2px solid var(--navy);padding-top:18px}
+.why-not b{display:block;font:600 22px/1.25 var(--display)}
+.why-not p{font:400 19px/1.42 var(--text);color:var(--slate);margin-top:8px}
+
+/* ===================== 12 · decision rule ===================== */
+#rule h1{color:var(--paper)}
+.quad{position:absolute;left:120px;right:120px;top:340px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:22px}
+.quad div{border-radius:26px;padding:40px 44px 44px;background:var(--navy-2);min-height:262px}
+.quad b{display:flex;align-items:center;gap:16px;font:600 54px/1 var(--display);color:var(--paper)}
+.quad p{font:400 26px/1.42 var(--text);color:var(--paper-80);margin-top:20px}
+.quad .ship{background:var(--paper)}
+.quad .ship b{color:var(--navy)}
+.quad .ship b::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--coral)}
+.quad .ship p{color:var(--navy)}
+#rule .source{font-size:21px;color:var(--paper-80)}
+
+/* ===================== 13 · buyer ===================== */
+.buyer{display:grid;grid-template-columns:420px 1fr 500px;column-gap:68px;align-items:start}
+.buyer .who{padding-top:6px}
+.buyer h1{font-size:64px;margin-top:40px}
+.buyer .role{font:500 30px/1.25 var(--display);color:var(--slate);margin-top:10px}
+.buyer .tags{margin-top:28px;font:400 22px/1.5 var(--text)}
+.buyer .voice{padding-top:20px}
+.buyer .bubble{background:var(--navy);color:var(--paper);font-size:44px;line-height:1.14}
+.buyer .attr{margin:58px 0 0 6px;font:400 22px/1.4 var(--text);color:var(--slate)}
+.pitch{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;column-gap:32px;border-top:2px solid var(--navy);padding-top:24px}
+.pitch p{font:500 23px/1.36 var(--display);margin-top:12px}
+.pitch .no p{color:var(--slate)}
+.committee .row{display:grid;grid-template-columns:130px 1fr;column-gap:20px;padding:20px 0;border-top:1px solid var(--line-2)}
+.committee .row:first-of-type{border-top:0;padding-top:16px}
+.committee .row b{font:600 24px/1.2 var(--display)}
+.committee .row span{font:500 22px/1.25 var(--display)}
+.committee .row em{display:block;font:400 19px/1.38 var(--text);font-style:normal;color:var(--slate);margin-top:4px}
+.committee .row.sign{background:var(--navy);color:var(--paper);border-radius:18px;padding:20px 22px;border-top:0;margin-bottom:6px}
+.committee .row.sign em{color:var(--paper-80)}
+
+/* ===================== 14 · GTM ===================== */
+.tl{position:absolute;left:120px;right:120px;top:318px;height:250px}
+.tl .line{position:absolute;left:0;right:0;top:34px;height:4px;background:var(--line-2);border-radius:2px}
+.tl .fill{position:absolute;left:0;width:30%;top:34px;height:4px;background:var(--navy);border-radius:2px}
+.tl .ev{position:absolute;top:0;width:380px}
+.tl .ev::before{content:"";position:absolute;left:0;top:24px;width:24px;height:24px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 4px var(--navy)}
+.tl .ev.big::before{background:var(--coral);box-shadow:0 0 0 6px var(--paper)}
+.tl .ev small{display:block;font:600 16px/1 var(--text);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
+.tl .ev b{display:block;font:600 27px/1.2 var(--display);margin-top:56px}
+.tl .ev p{font:400 20px/1.4 var(--text);color:var(--slate);margin-top:8px;max-width:360px}
+.chips{position:absolute;left:120px;right:120px;top:578px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.chips div{border-radius:18px;padding:20px 22px;background:var(--white);box-shadow:inset 0 0 0 2px var(--line)}
+.chips .label{font-size:14px}
+.chips p{font:600 24px/1.25 var(--display);margin-top:10px}
+.chips p span{display:block;font:400 18px/1.38 var(--text);color:var(--slate);margin-top:6px}
+.channels{position:absolute;left:120px;right:120px;top:812px;display:grid;grid-template-columns:repeat(3,1fr);column-gap:40px}
+.channels div{border-top:2px solid var(--navy);padding-top:16px}
+.channels b{font:600 22px/1.2 var(--display)}
+.channels p{font:400 19px/1.42 var(--text);color:var(--slate);margin-top:8px}
+
+/* ===================== 15 · dashboard ===================== */
+.kpis{position:absolute;left:120px;right:120px;top:310px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.kpi{border-radius:28px;padding:40px 44px 44px;background:var(--white);box-shadow:inset 0 0 0 2px var(--line)}
+.kpi.main{background:var(--navy);color:var(--paper);box-shadow:none}
+.kpi .label{font-size:15px}
+.kpi.main .label{color:var(--paper-60)}
+.kpi .v{display:flex;align-items:baseline;gap:22px;margin-top:22px;font:600 132px/.95 var(--display);letter-spacing:-.03em;white-space:nowrap}
+.kpi .v span{font-size:64px;color:var(--slate)}
+.kpi.main .v span{color:var(--paper-60)}
+.kpi p{font:500 25px/1.36 var(--display);margin-top:24px;max-width:700px}
+.kpi small{display:block;font:400 20px/1.4 var(--text);color:var(--slate);margin-top:12px}
+.kpi.main small{color:var(--paper-80)}
+.signals{position:absolute;left:120px;right:120px;top:780px;display:grid;grid-template-columns:1.05fr 1fr 1fr 1fr;column-gap:36px}
+.signals div{border-top:2px solid var(--navy);padding-top:16px}
+.signals b{font:600 22px/1.25 var(--display)}
+.signals p{font:400 19px/1.42 var(--text);color:var(--slate);margin-top:8px}
+
+/* ===================== 16 · learnings ===================== */
+#learn blockquote{position:absolute;left:120px;top:186px;max-width:1500px;font:600 68px/1.12 var(--display);letter-spacing:-.015em;color:var(--paper);text-wrap:balance}
+#learn blockquote::before{content:"";position:absolute;left:-2px;top:-56px;width:26px;height:26px;border-radius:50%;background:var(--coral)}
+#learn .cite{position:absolute;left:120px;top:604px;font:500 24px/1.3 var(--text);color:var(--paper-60)}
+.lessons{position:absolute;left:120px;right:120px;top:704px;display:grid;grid-template-columns:1fr 1fr;column-gap:64px}
+.lessons div{border-top:1px solid var(--paper-35);padding-top:22px}
+.lessons p{font:400 24px/1.45 var(--text);color:var(--paper-80);margin-top:14px}
+
+/* ===================== 17 · resources ===================== */
+.res{position:absolute;left:120px;right:120px;top:300px;display:grid;grid-template-columns:1fr 1.05fr .9fr .55fr;column-gap:48px}
+.res h3{font:600 30px/1 var(--display);padding-bottom:16px;border-bottom:3px solid var(--navy)}
+.res ul{list-style:none}
+.res li{padding:13px 0;border-bottom:1px solid var(--line-2);font:500 21px/1.3 var(--display)}
+.res li span{display:block;font:400 17px/1.35 var(--text);color:var(--slate);margin-top:3px}
+.res li a{text-decoration:none}
+.res li a:hover{text-decoration:underline}
+.tools li{font:600 26px/1.2 var(--display);padding:14px 0}
+.tools li span{font-weight:400}
+.close{position:absolute;left:120px;top:150px;display:flex;align-items:center;gap:36px}
+.close svg{width:190px;height:auto;display:block}
+.close p{font:500 34px/1 var(--display);color:var(--slate);padding-top:6px}
+
+/* ---------- controls ---------- */
+.controls{position:fixed;right:16px;bottom:14px;display:flex;gap:8px;z-index:5;opacity:0;transition:opacity .2s}
+body:hover .controls,.controls:focus-within{opacity:1}
+.controls button{appearance:none;border:0;border-radius:10px;width:40px;height:40px;background:rgba(15,42,61,.78);color:var(--paper);font:600 18px/1 var(--text);cursor:pointer}
+.controls button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- print / export: one slide per page ---------- */
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;background:none}
+  .stage{position:static}
+  .deck{position:static;transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;display:block!important;width:1920px;height:1080px;page-break-after:always;break-after:page}
+  .controls{display:none}
+}
+</style>
+</head>
+<body>
+<div class="stage"><div class="deck" id="deck">
+
+<!-- ===================== 1 · Cover + opener video ===================== -->
+<section class="slide navy" id="cover" aria-label="Nomi: compliant collateral before the door closes">
+  <div class="wm"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 10 228 82" role="img" aria-label="Nomi"><path d="M7 80 V58 A18 18 0 0 1 43 58 V80" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="89" cy="60" r="20" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M135 80 V53 A13 13 0 0 1 161 53 V80 M161 53 A13 13 0 0 1 187 53 V80" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M213 47 V80" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="213" cy="23" r="8.5" fill="#FF5A36"/></svg></div>
+  <h1>Compliant collateral before the door closes.</h1>
+  <p class="by">Jessica Manna<span>Product Management Foundations, final project</span></p>
+  <p class="tag">Ready when they ask.</p>
+  <div class="ugc" id="ugc">
+    <video id="intro" src="../assets/nomi-intro.mp4" poster="../assets/nomi-intro-poster.jpg" playsinline preload="metadata" aria-label="Jessica's 66-second intro to Nomi"></video>
+    <button class="play" type="button" id="playIntro" aria-label="Play Jessica's intro video, 1 minute 6 seconds"><i></i>Play intro · 1:06</button>
+  </div>
+  <span class="signal ugc-dot" aria-hidden="true"></span>
+</section>
+
+<!-- ===================== 2 · The moment ===================== -->
+<section class="slide navy" id="moment" data-chapter="Problem" data-module="Module 1 · Moment of misery" aria-label="The moment of misery">
+  <h1>Partners remember who responds the same day, but the approved process takes about a week.</h1>
+  <div class="moment">
+    <div class="ask">
+      <div class="bubble">Send me<br>something.<span class="signal"></span></div>
+      <p class="who">A realtor finally takes the loan officer’s call and ends it with this. The loan officer currently does one of three things.</p>
+    </div>
+    <svg class="branch" viewBox="0 0 236 560" aria-hidden="true">
+      <g fill="none" stroke="rgba(245,241,234,.42)" stroke-width="3" stroke-linecap="round">
+        <path d="M0 170 C 118 170, 112 41, 226 41"/>
+        <path d="M0 170 C 118 170, 112 228, 226 228"/>
+        <path d="M0 170 C 118 170, 112 414, 226 414"/>
+      </g>
+      <g fill="#F5F1EA"><circle cx="226" cy="41" r="7"/><circle cx="226" cy="228" r="7"/><circle cx="226" cy="414" r="7"/></g>
+    </svg>
+    <div class="paths">
+      <div class="path">
+        <h3>She submits a request and waits.</h3>
+        <div class="row"><p>The flyer arrives after the moment has passed, or she gives up and cancels it.</p>
+        <div class="result"><b>Arrives too late</b>Only 14% of top producers’ urgent requests arrive on time.</div></div>
+      </div>
+      <div class="path">
+        <h3>She makes it herself.</h3>
+        <div class="row"><p>In Canva, Word or a generic AI tool. Off-brand, often missing the NMLS ID, the Equal Housing logo or rate disclosures.</p>
+        <div class="result"><b>Not compliant</b>37% of sampled LO-made assets had at least one violation.</div></div>
+      </div>
+      <div class="path">
+        <h3>She sends nothing.</h3>
+        <div class="row"><p>The door she just opened quietly closes.</p>
+        <div class="result"><b>Partner goes elsewhere</b>The partner moves to another loan officer.</div></div>
+      </div>
+    </div>
+  </div>
+  <p class="source">The pain is concentrated in unplanned requests. Planned work, ordered a week ahead, mostly gets through the queue.</p>
+</section>
+
+<!-- ===================== 3 · Strategic crisis ===================== -->
+<section class="slide paper" id="crisis" data-chapter="Problem" data-module="Module 1 · Strategic crisis" aria-label="Strategic crisis for lenders">
+  <h1>If lenders do nothing for the next 12 months, the channel at risk is the main one.</h1>
+  <div class="crisis">
+    <div class="c">
+      <b>7.40%</b>
+      <p>The 30-year fixed on Oct 8, 2026, the highest since November 2023. Origination forecasts keep getting cut.</p>
+    </div>
+    <div class="c">
+      <b>25 <small>bp</small></b>
+      <div class="bars" aria-hidden="true"><div class="bar"><i style="width:64.1%"></i></div><div class="bar-l">25 bp, Q2 2026</div><div class="bar dim"><i style="width:100%"></i></div><div class="bar-l">39 bp, average since 2008</div></div>
+      <p>Earned per loan by independent lenders in Q2 2026, against a 39 bp average since 2008.</p>
+    </div>
+    <div class="c">
+      <b>80%</b>
+      <div class="bars" aria-hidden="true"><div class="bar"><i style="width:80%"></i></div><div class="bar-l">Purchase share of volume</div></div>
+      <p>Of independent lenders’ volume was purchase in Q2 2026, and realtor and builder referrals drive most retail purchase volume.</p>
+    </div>
+    <div class="c">
+      <b>4 <small>hours</small></b>
+      <div class="bars" aria-hidden="true"><div class="bar"><i style="width:2.4%;min-width:16px"></i></div><div class="bar-l">4 hours of work</div><div class="bar dim"><i style="width:100%"></i></div><div class="bar-l">About a week to arrive</div></div>
+      <p>Of work per flyer, but about a week to arrive: briefing, design, compliance and revisions across several people.</p>
+    </div>
+  </div>
+  <div class="after">
+    <p>Lenders are cutting staff, so they can’t hire their way out.</p>
+    <p>Loan officers stop asking. More make their own, putting non-compliant flyers on the street with the lender’s name on them.</p>
+  </div>
+</section>
+
+<!-- ===================== 4 · Problem hook and value proposition ===================== -->
+<section class="slide paper" id="hook" data-chapter="Problem" data-module="Module 1 · Problem hook and value proposition" aria-label="Problem hook and value proposition">
+  <span class="label">The problem hook</span>
+  <p class="statement">Today no path is both fast enough to keep the door open and safe enough to carry the lender’s name.</p>
+  <p class="setup">When a referral partner says “send me something,” a loan officer has about a day to show she’s the professional worth sending business to. Her lender’s process takes about a week.</p>
+  <div class="vp">
+    <div class="card">
+      <span class="label" style="color:var(--paper-60)">Value proposition</span>
+      <p>For retail branch loan officers, starting with top producers, Nomi delivers professional, on-brand, compliance-reviewed collateral that looks like theirs, fast enough to use while the door is still open.</p>
+    </div>
+    <div>
+      <span class="label">Open risks from the cold read</span>
+      <ul class="risks">
+        <li>Will lenders buy Nomi, and who at the lender signs?</li>
+        <li>Will lenders’ compliance teams trust AI review on rates and co-branding?</li>
+        <li>Could templates that look alike recreate the problem faster?</li>
+      </ul>
+      <p class="note">The case rests on referral revenue, not time saved: a buyer hears “time saved” as “cut designers.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 5 · Maya ===================== -->
+<section class="slide paper" id="maya" data-chapter="Research" data-module="Module 2 · Loan officer persona" aria-label="Loan officer persona: Maya Reyes">
+  <div class="persona">
+    <div class="who">
+      <div class="arch"><img src="../assets/maya-reyes-avatar.png" alt="Illustration of Maya Reyes, a loan officer, holding a phone"></div>
+      <h1>Maya Reyes</h1>
+      <p class="role">The Same-Day Closer</p>
+      <p class="tags">Top-producing retail branch loan officer. Top 20% by units, about 26 active referral partners. Her purchase business runs on realtor and builder referrals.</p>
+    </div>
+    <div class="voice">
+      <div class="bubble">“Eight days for a flyer isn’t a process, it’s a punishment.”</div>
+      <p class="attr">Top producer, 14 years, 31 active partners. Stopped submitting tickets in 2024.</p>
+      <div class="jtbd">
+        <span class="label">Job to be done</span>
+        <p>When a partner or prospect gives me an opening, help me prove quickly that I’m a credible, reliable professional, so the door stays open.</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>14%</b><span>of top producers’ urgent requests arrive on time</span></div>
+      <div class="stat"><b>6.5 days</b><span>median turnaround, against a partner who needs it within a day</span></div>
+      <div class="stat"><b>59%</b><span>of top producers made their own unreviewed asset at their last urgent need</span></div>
+      <div class="stat"><b>2.1 / 5</b><span>top producers’ satisfaction with the request process, lowest of any group</span></div>
+    </div>
+  </div>
+  <p class="source">Composite persona, built from the Module 2 discovery dataset (Harborline Home Lending, simulated course data), Sept 8 – Oct 2, 2026: request-queue export (n=914), shadow-asset audit (n=240), LO survey (n=94) and 9 interviews.</p>
+</section>
+
+<!-- ===================== 6 · Workaround vs. future-state journey ===================== -->
+<section class="slide paper" id="journey" data-chapter="Research" data-module="Module 2 · Workaround and future-state journey" aria-label="Today's workaround versus the future-state journey">
+  <h1>Same request. A reviewed draft in about 3 minutes, not a 6.5-day median.</h1>
+  <div class="journey">
+    <div class="emo" aria-hidden="true">
+      <svg viewBox="0 0 1680 120" preserveAspectRatio="none"><path d="M60 100 C 240 100, 300 74, 460 70 S 760 52, 900 46 S 1240 26, 1400 22 S 1600 12, 1640 10" fill="none" stroke="#0F2A3D" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/>
+      <g fill="#0F2A3D"><circle cx="60" cy="100" r="7"/><circle cx="270" cy="84" r="7"/><circle cx="480" cy="68" r="7"/><circle cx="690" cy="58" r="7"/><circle cx="900" cy="46" r="7"/><circle cx="1110" cy="38" r="7"/><circle cx="1330" cy="25" r="7"/></g><circle cx="1640" cy="10" r="11" fill="#FF5A36"/></svg>
+      <span class="w" style="left:60px;top:66px">Urgent</span>
+      <span class="w" style="left:270px;top:50px">Relieved</span>
+      <span class="w" style="left:480px;top:34px">Engaged</span>
+      <span class="w" style="left:690px;top:24px">Confident</span>
+      <span class="w" style="left:900px;top:12px">In control</span>
+      <span class="w" style="left:1110px;top:4px">Safe</span>
+      <span class="w" style="left:1330px;top:-10px">Impressed</span>
+      <span class="w" style="left:1600px;top:-26px">Assured</span>
+    </div>
+    <div class="stages">
+      <div>
+        <div class="stage-h">Capture<small>LO</small></div>
+        <div class="today"><span class="label">Today</span><p>Waits a week, DIYs or sends nothing. Many don’t know the request form exists.</p></div>
+        <div class="nomi"><span class="label">With Nomi</span><p>She types one line in Nomi chat and tags the partner. No form.</p></div>
+      </div>
+      <div>
+        <div class="stage-h">Create<small>LO</small></div>
+        <div class="today"><span class="label">Today</span><p>A 1.8-day brief and 2.3 clarifying messages. The same 9 of 140 templates, or Canva DIY.</p></div>
+        <div class="nomi"><span class="label">With Nomi</span><p>Brief done in under 3 minutes. The first design arrives in her style, with the partner’s co-branding and disclosures applied.</p></div>
+      </div>
+      <div>
+        <div class="stage-h">Finalize<small>LO + Nomi</small></div>
+        <div class="today"><span class="label">Today</span><p>Revision rounds, with 38% of tickets returned. A 1.9-day review, which DIY skips entirely.</p></div>
+        <div class="nomi"><span class="label">With Nomi</span><p>Edits in plain words. NMLS, EHO and logo checks clear automatically; rates and co-branding follow the GC-approved path.</p></div>
+      </div>
+      <div>
+        <div class="stage-h">Deliver &amp; audit<small>Partner, compliance</small></div>
+        <div class="today"><span class="label">Today</span><p>A 6.5-day median or a generic flyer. No view of shadow assets; 37% violate the rules.</p></div>
+        <div class="nomi"><span class="label">With Nomi</span><p>The partner gets an accurate, compliant piece in under 15 minutes. Compliance sees every asset in the audit log.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="adv">
+    <span class="label">Three advantages over the workaround</span>
+    <div><b>Faster than the queue, safer than DIY</b><span>Under 15 minutes with disclosures built in.</span></div>
+    <div><b>Looks like hers, made for this partner</b><span>Her style profile plus the partner’s co-branding, not the same 9 templates.</span></div>
+    <div><b>Compliance sees everything</b><span>Every asset is logged. Canva and ChatGPT pieces leave no record.</span></div>
+  </div>
+  <p class="source">From the future-state journey map: three personas, from the partner’s “send me something” through the compliance audit. Nomi timings are design targets, not measured results.</p>
+</section>
+
+<!-- ===================== 7 · Hypothesis ===================== -->
+<section class="slide paper" id="hypothesis" data-chapter="Hypothesis" data-module="Module 3 · Data-backed hypothesis" aria-label="Data-backed hypothesis">
+  <div class="hyp-top">
+    <div class="big">14% <span>→</span> 60%</div>
+    <p>of top producers’ urgent partner requests answered with a reviewed asset within 1 business day.</p>
+  </div>
+  <div class="track" aria-hidden="true">
+    <div class="base"></div><div class="now"></div><div class="goal"></div>
+    <div class="tick" style="left:14%">Today 14%</div>
+    <div class="tick down" style="left:39%">Smallest lift worth shipping: +25 pts (39%)</div>
+    <div class="tick t60">Target 60%</div>
+    <div class="dot60"></div>
+  </div>
+  <div class="formula">
+    <div><span class="label">Based on</span><p>Only 14% of top producers’ urgent requests arrive on time, and 59% make their own unreviewed asset instead.</p></div>
+    <div><span class="label">We believe</span><p>Giving top-producing loan officers Nomi for urgent partner requests will move those requests back into a compliant path.</p></div>
+    <div class="key"><span class="label">As measured by</span><p>Urgent requests answered with a reviewed asset within 1 business day, from 14% to 60%.</p></div>
+    <div><span class="label">Protecting</span><p>The post-delivery compliance issue rate.</p></div>
+    <div><span class="label">Deciding after</span><p>A 90-day A/B test with one lender’s 30 top producers.</p></div>
+    <div><span class="label">Lagging North Star</span><p>Referred applications and funded loans from partners tagged in the brief.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 8 · Roadmap ===================== -->
+<section class="slide paper" id="roadmap" data-chapter="Blueprint" data-module="Module 4 · Now / Next / Later roadmap" aria-label="Now, Next, Later roadmap">
+  <h1>Prove the flyer first.</h1>
+  <p class="lead">No new asset types, live rates or buyer dashboards until top producers bring urgent requests into a compliant path.</p>
+  <div class="board">
+    <section class="lane now" aria-label="Now">
+      <header><h3>Now</h3><span>90-day pilot</span></header>
+      <div class="feat"><div class="meta"><span class="id">N1</span><span class="ve">V5 · E2</span></div><span class="nm">Smart chat brief + partner tag</span><span class="why">Removes the 1.6-day clarification lag</span></div>
+      <div class="feat"><div class="meta"><span class="id">N3</span><span class="ve">V4 · E2</span></div><span class="nm">Product flyer templates</span><span class="why">The asset the pilot delivers</span></div>
+      <div class="feat"><div class="meta"><span class="id">N13</span><span class="ve">V4 · E2</span></div><span class="nm">Usage stats</span><span class="why">Without it, 14% → 60% can’t be measured</span></div>
+      <div class="feat n2"><div class="meta"><span class="id">N2</span><span class="ve">V5 · E4</span></div><span class="nm">Compliance engine</span><span class="why">Major project, pulled in: the lender’s GC holds the veto</span></div>
+    </section>
+    <section class="lane next" aria-label="Next">
+      <header><h3>Next</h3><span>1–2 sprints</span></header>
+      <div class="feat"><div class="meta"><span class="id">N5</span><span class="ve">V4 · E3</span></div><span class="nm">Partner co-branding</span><span class="why">Adds the partner’s branding and an approval step</span></div>
+      <div class="feat"><div class="meta"><span class="id">N12</span><span class="ve">V4 · E3</span></div><span class="nm">Audit archive with retention</span><span class="why">N2’s audit trail covers the pilot</span></div>
+      <div class="feat"><div class="meta"><span class="id">N4</span><span class="ve">V3 · E2</span></div><span class="nm">LO personal brand</span><span class="why">Fights “Agents notice”</span></div>
+      <div class="feat"><div class="meta"><span class="id">N11</span><span class="ve">V3 · E1</span></div><span class="nm">LO satisfaction rating</span><span class="why">Tracks top-producer morale, a top-3 exit reason</span></div>
+    </section>
+    <section class="lane later" aria-label="Later">
+      <header><h3>Later</h3><span>backlog</span></header>
+      <div class="feat"><div class="meta"><span class="id">N6</span><span class="ve">V3 · E3</span></div><span class="nm">Escalation to a JIRA ticket</span><span class="why">Email escalation covers the pilot</span></div>
+      <div class="feat"><div class="meta"><span class="id">N9</span><span class="ve">V2 · E5</span></div><span class="nm">Live rate / pricing feed</span><span class="why">Most product flyers carry no rate</span></div>
+      <div class="feat"><div class="meta"><span class="id">N10</span><span class="ve">V3 · E4</span></div><span class="nm">More asset types</span><span class="why">Flyer first</span></div>
+    </section>
+    <section class="lane cut" aria-label="Cut list">
+      <header><h3>Cut</h3></header>
+      <div class="feat"><div class="meta"><span class="id">N7</span></div><span class="nm">“What can I say” guidance</span><span class="why">New LOs are the second segment</span></div>
+      <div class="feat"><div class="meta"><span class="id">N8</span></div><span class="nm">Partner referral dashboard</span><span class="why">The partner tag plus usage stats cover pilot attribution</span></div>
+    </section>
+  </div>
+  <div class="override">
+    <span class="dot" aria-hidden="true"></span>
+    <p><b>Where I overrode the AI.</b> Its baseline had N2 catching and fixing non-compliant drafts. I changed it so non-compliant drafts are never created: Nomi explains the issue and drafts the compliant version, logged in the audit trail. I kept N9 and N10 as known future demand instead of cutting them, and added N13, because the original backlog couldn’t measure the M3 metric.</p>
+  </div>
+  <p class="source">13 backlog items scored 1–5 on value (lift on the primary metric) and effort. Team: 2 engineers, 1 designer and a compliance advisor. <a href="https://jessicamanna.github.io/pm-final-project/04-roadmap/roadmap.html">Open the interactive roadmap</a></p>
+</section>
+
+<!-- ===================== 9 · PRD and prototype ===================== -->
+<section class="slide navy" id="proto" data-chapter="Blueprint" data-module="Module 4 · PRD and prototype" aria-label="PRD highlights and prototype demo">
+  <div class="demo"><video data-autoplay src="../assets/nomi-demo.mp4" poster="../assets/prototype-ready.png" muted loop playsinline preload="auto" aria-label="28-second demo of the clickable prototype"></video></div>
+  <div class="proto">
+    <h1>One chat to a reviewed, on-brand flyer in about 3 minutes.</h1>
+    <div class="flow">
+      <div><b><i>1</i>Brief</b><p>Chat brief: partner, loan program, needed-by date.</p></div>
+      <div><b><i>2</i>Draft</b><p>A draft with 3 headlines, in the lender’s brand.</p></div>
+      <div><b><i>3</i>Check</b><p>Compliance pre-check against 6 rules.</p></div>
+      <div><b><i>4</i>Ready</b><p>A ready flyer with the partner tag and elapsed time.</p></div>
+    </div>
+    <div class="decision">
+      <span class="dot" aria-hidden="true"></span>
+      <div><p>Compliance runs before drafting, so a non-compliant draft never exists.</p>
+      <span>A request like a rate without an APR is explained, drafted compliantly and logged in the audit trail.</span></div>
+    </div>
+    <div class="evals">
+      <p><b>Evals</b>100% of flyers pass all 6 checks on a 20-request test set (5 deliberately non-compliant). Median time to a reviewed draft: 3 minutes or less.</p>
+      <p><b>Won’t (now)</b>A real AI or compliance engine, live rates, full partner co-branding, other asset types, CRM sync.</p>
+    </div>
+  </div>
+  <p class="source">Clickable prototype, recorded and time-compressed. Try it: <a href="https://jessicamanna.github.io/pm-final-project/">jessicamanna.github.io/pm-final-project</a></p>
+</section>
+
+<!-- ===================== 10 · Meet Nomi ===================== -->
+<section class="slide paper" id="nomi" data-chapter="Blueprint" data-module="Brand and voice" aria-label="Meet Nomi: brand and voice">
+  <div class="chat" aria-label="Sample lines in Nomi's voice">
+    <div class="msg"><span class="av"><svg viewBox="16 6 80 88" aria-hidden="true"><path d="M30 80 V48 A20 20 0 0 1 70 48 V80" fill="none" stroke="#F5F1EA" stroke-width="15" stroke-linecap="round"/><circle cx="80" cy="20" r="9" fill="#FF5A36"/></svg></span><div class="b"><small>First hello</small>Hi Maya, I’m Nomi. Tell me who’s asking and what they need. I’ll have something ready before your coffee cools.</div></div>
+    <div class="msg me"><div class="b">send me something</div></div>
+    <div class="msg"><span class="av"><svg viewBox="16 6 80 88" aria-hidden="true"><path d="M30 80 V48 A20 20 0 0 1 70 48 V80" fill="none" stroke="#F5F1EA" stroke-width="15" stroke-linecap="round"/><circle cx="80" cy="20" r="9" fill="#FF5A36"/></svg></span><div class="b"><small>Easter egg</small>Say less. Who’s it for, and what did they ask for?</div></div>
+    <div class="msg"><span class="av"><svg viewBox="16 6 80 88" aria-hidden="true"><path d="M30 80 V48 A20 20 0 0 1 70 48 V80" fill="none" stroke="#F5F1EA" stroke-width="15" stroke-linecap="round"/><circle cx="80" cy="20" r="9" fill="#FF5A36"/></svg></span><div class="b"><small>Compliance catch</small>One thing before this goes out: the rate needs its APR beside it. I’ve added the disclosure. Want to check the wording?</div></div>
+    <div class="msg"><span class="av"><svg viewBox="16 6 80 88" aria-hidden="true"><path d="M30 80 V48 A20 20 0 0 1 70 48 V80" fill="none" stroke="#F5F1EA" stroke-width="15" stroke-linecap="round"/><circle cx="80" cy="20" r="9" fill="#FF5A36"/></svg></span><div class="b"><small>Strategic nudge</small>Priya’s open house is Saturday. Want a matching sign-in-table version with her co-branding?</div></div>
+  </div>
+  <div class="persona-copy">
+    <span class="label">Meet Nomi</span>
+    <h1 style="margin-top:18px">The sharp, warm marketing partner every loan officer wishes sat down the hall.</h1>
+    <div class="traits">
+      <div><b>Friendly &amp; warm</b><span>Uses your name, remembers your partners.</span></div>
+      <div><b>Smart</b><span>Knows mortgage, partners and the rules. Never shows off.</span></div>
+      <div><b>Strategic</b><span>Thinks of what you didn’t. Offers the next creative move.</span></div>
+      <div><b>Delightful</b><span>Small, earned surprises that make the work feel good.</span></div>
+    </div>
+    <div class="guard"><b>Personality never overrides compliance.</b><span>The lender’s compliance team sets the rules; Nomi applies them. On collateral, Nomi is silent: the loan officer and the lender’s brand speak.</span></div>
+  </div>
+  <div class="swatches" aria-label="Brand colors">
+    <div><i style="background:#0F2A3D"></i>Harbor Navy</div>
+    <div><i style="background:#FF5A36"></i>Signal Coral</div>
+    <div><i style="background:#F5F1EA;box-shadow:inset 0 0 0 2px #D8D0C2"></i>Paper</div>
+    <div><i style="background:#1F7A62"></i>Cleared Green</div>
+    <div><i style="background:#56677A"></i>Slate</div>
+  </div>
+</section>
+
+<!-- ===================== 11 · Experiment design ===================== -->
+<section class="slide paper" id="experiment" data-chapter="Validation" data-module="Module 5 · Experiment design" aria-label="Experiment design">
+  <h1>A 90-day A/B test where Nomi is the only difference between the groups.</h1>
+  <div class="split">
+    <div class="groups">
+      <div class="group v"><b>15 get Nomi</b><span>Variant, behind a feature flag</span><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="group c"><b>15 keep today’s process</b><span>Control; same queue, templates and CRM</span><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="days">
+      <div class="line"></div>
+      <div class="pt" style="left:0">Day 0<b>Randomize by loan officer</b></div>
+      <div class="pt p90">Day 90<b>Read the result, once</b></div>
+    </div>
+  </div>
+  <div class="nums">
+    <div><b>~100</b><span>urgent requests per group: 15 LOs × about 2.3 a month × 3 months</span></div>
+    <div><b>77</b><span>needed per group once each LO’s requests are treated as related (48 if not)</span></div>
+    <div><b>+25 pts</b><span>smallest lift worth shipping, from a 14% baseline (power 80%, significance 5%)</span></div>
+    <div><b>Guardrail</b><span>Compliance issue rate no higher than the control’s approved assets. A breach pauses Nomi through the flag.</span></div>
+  </div>
+  <div class="why-not">
+    <div><b>Why not revenue?</b><p>The P90 time from lead to funding for a purchase loan is 164 days, and only about 7% of referrals close and fund. It stays the lagging North Star, reviewed after the test.</p></div>
+    <div><b>Why not a pre/post pilot?</b><p>No control group. Losing two production staff alone moved urgent on-time delivery from 34% to 19%.</p></div>
+    <div><b>The honest limit</b><p>With 30 LOs, the test can confirm a large lift but not a small one. Control LOs get Nomi at the read date if it ships.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 12 · Decision rule ===================== -->
+<section class="slide navy" id="rule" data-chapter="Validation" data-module="Module 5 · Decision rule" aria-label="Decision rule">
+  <h1>The go/no-go call follows a rule written now, not how the results look later.</h1>
+  <div class="quad">
+    <div class="ship"><b>Ship</b><p>Nomi beats the control by at least 25 pts at p &lt; 0.05 and the compliance issue rate stays within its boundary at day 90. Roll out to all of the lender’s top producers, with new LOs next.</p></div>
+    <div><b>Iterate</b><p>Nomi is ahead, but by less than 25 pts. Sharpen the chat brief or templates, or add a second lender for more sample, and re-run.</p></div>
+    <div><b>Investigate</b><p>The lift clears 25 pts but the guardrail breaks, or results get worse for one branch or partner type. Find who was harmed before any rollout.</p></div>
+    <div><b>Kill</b><p>Nomi shows no improvement over the control, or does worse.</p></div>
+  </div>
+  <p class="source">Not run yet. The test is planned with one lender: 30 top producers randomized 15/15 on day 0, with the read on day 90 and no results reviewed before then.</p>
+</section>
+
+<!-- ===================== 13 · Buyer persona ===================== -->
+<section class="slide paper" id="stacy" data-chapter="Launch" data-module="Buyer persona and ICP" aria-label="Buyer persona: Stacy C.">
+  <div class="buyer">
+    <div class="who">
+      <div class="arch"><img src="../assets/stacy-c-avatar.png" alt="Illustration of Stacy C., a chief marketing officer, with blonde curly hair and a sailboat on her shirt"></div>
+      <h1>Stacy C.</h1>
+      <p class="role">The Referral-Growth CMO</p>
+      <p class="tags">CMO (or head of sales) at an independent retail mortgage lender. Owns brand, LO enablement and the request queue. Reports to the CEO; the CFO scrutinizes her spend.</p>
+    </div>
+    <div class="voice">
+      <div class="bubble">“If you tell me LOs win more realtor partners, that’s a sales budget conversation, and sales has money.”</div>
+      <p class="attr">VP Marketing, buyer interview (P9)</p>
+      <div class="pitch">
+        <div><span class="label">Lead with</span><p>Partners kept and won: referral revenue for the lender, with partner-tagged attribution she’s never had.</p></div>
+        <div class="no"><span class="label">Never lead with</span><p>“Saves your team time.” She hears it as a headcount cut.</p></div>
+      </div>
+    </div>
+    <div class="committee">
+      <span class="label">Buying committee</span>
+      <div class="row sign"><b>Signs</b><div><span>CMO or head of sales</span><em>Referral growth, brand control, usage reporting</em></div></div>
+      <div class="row"><b>Veto</b><div><span>Compliance team &amp; GC</span><em>10% sampling for 6 months, examiner-ready audit log</em></div></div>
+      <div class="row"><b>Champion</b><div><span>Top-producer LOs</span><em>Highest request volume, lowest satisfaction, most influence</em></div></div>
+      <div class="row"><b>Influencer</b><div><span>CEO / CFO</span><em>Approves budget; hears “time saved” as “cut designers”</em></div></div>
+    </div>
+  </div>
+  <p class="source">Composite persona, built from the Module 2 discovery dataset (Harborline Home Lending, simulated course data), Sept 8 – Oct 2, 2026: 9 interviews, request-queue export (n=914), shadow-asset audit (n=240), LO survey (n=94) and CRM baseline.</p>
+</section>
+
+<!-- ===================== 14 · GTM ===================== -->
+<section class="slide paper" id="gtm" data-chapter="Launch" data-module="Module 6 · Go-to-market plan" aria-label="Go-to-market plan">
+  <h1>Jan 6 is a release. The launch waits for the day-90 read.</h1>
+  <div class="tl">
+    <div class="line"></div><div class="fill"></div>
+    <div class="ev" style="left:0"><small>Jan 6, 2027</small><b>Release to the pilot lender</b><p>Phase 1, to early April: the pilot lender runs the A/B test.</p></div>
+    <div class="ev big" style="left:30%"><small>April 2027</small><b>Day-90 read</b><p>Launch only if Nomi clears the ship bar, with no rise in compliance issues.</p></div>
+    <div class="ev" style="left:56%"><small>Mid-April 2027</small><b>Launch</b><p>Phase 2: the case study, PR, outreach and ads go live together.</p></div>
+    <div class="ev" style="left:80%;width:340px"><small>May onward</small><b>Onboard lenders</b><p>Phase 3: track LO activation and compliance at each one.</p></div>
+  </div>
+  <div class="chips">
+    <div><span class="label">Goal</span><p>5 signed lenders<span>within 90 days of launch: a conversion goal</span></p></div>
+    <div><span class="label">Audience</span><p>Head of marketing or sales, plus the CEO<span>The compliance lead and GC, as veto holders</span></p></div>
+    <div><span class="label">Tier</span><p>L, multi-channel<span>One pilot doesn’t yet justify an XL campaign</span></p></div>
+    <div><span class="label">Budget</span><p>$5,000 a month<span>Mostly time and content production</span></p></div>
+  </div>
+  <div class="channels">
+    <div><b>Owned</b><p>Founder-led outreach to lender contacts, organic LinkedIn campaigns, the Nomi website with the clickable demo.</p></div>
+    <div><b>Earned</b><p>The pilot lender’s case study and reference calls, PR with trade press such as HousingWire, a Digital Mortgage speaking slot.</p></div>
+    <div><b>Paid</b><p>Full-funnel UGC ads on X driving demo requests: lender CEOs are active there, and a CEO who wants Nomi speeds up enterprise sales.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 15 · Success dashboard ===================== -->
+<section class="slide paper" id="dash" data-chapter="Launch" data-module="Module 6 · Success dashboard" aria-label="Success dashboard">
+  <h1>Two numbers decide what happens after launch.</h1>
+  <div class="kpis">
+    <div class="kpi main"><span class="label">Lenders signed</span><div class="v">0 <span>→</span> 5</div><p>The pilot lender converting to paid, plus new lenders.</p><small>Measured 90 days after the April 2027 launch.</small></div>
+    <div class="kpi"><span class="label">Urgent requests answered in 1 business day</span><div class="v">14% <span>→</span> 60%</div><p>Urgent partner requests answered with a compliance-reviewed asset, at each new lender.</p><small>Measured over the first 90 days live at each lender.</small></div>
+  </div>
+  <div class="signals">
+    <div><b>The bad signal to watch</b><p>Demos and pilot requests but no signed contracts: that points to pricing, the value proposition or the compliance veto, not lead volume.</p></div>
+    <div><b>Double down</b><p>If lenders sign and their top producers activate.</p></div>
+    <div><b>Iterate</b><p>On messaging, if demos stall with buyers.</p></div>
+    <div><b>Pivot</b><p>To compliance-led selling, if the GC is the blocker.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 16 · What I learned ===================== -->
+<section class="slide navy" id="learn" data-chapter="Learnings" data-module="Module 6 · Individual insights" aria-label="What I learned">
+  <blockquote>The PM’s job isn’t to run the most academic experiment. It’s to choose evidence that’s good enough for the decision in front of you, be honest about what it can’t prove, and move.</blockquote>
+  <p class="cite">The aha moment, while designing the experiment</p>
+  <div class="lessons">
+    <div><span class="label">Friction</span><p>Nomi doesn’t lend itself to ruthless, data-driven experimentation. A purchase loan can take 164 days from lead to funding, and only about 7% of referrals close. And no CEO wants an academic study: they want it rolled out to everyone, fast.</p></div>
+    <div><span class="label">Key learning</span><p>I’m a marketer who has worked in product-led organizations. The rigor of designing before building, and working through every step instead of jumping to a vibe-coded build, changed what I was creating and who I was solving for.</p></div>
+  </div>
+</section>
+
+<!-- ===================== 17 · Resources ===================== -->
+<section class="slide paper" id="resources" data-chapter="" data-module="Resources" aria-label="Resources">
+  <div class="close">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 10 228 82" role="img" aria-label="Nomi"><path d="M7 80 V58 A18 18 0 0 1 43 58 V80" stroke="#0F2A3D" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="89" cy="60" r="20" stroke="#0F2A3D" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M135 80 V53 A13 13 0 0 1 161 53 V80 M161 53 A13 13 0 0 1 187 53 V80" stroke="#0F2A3D" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M213 47 V80" stroke="#0F2A3D" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="213" cy="23" r="8.5" fill="#FF5A36"/></svg>
+    <p>Ready when they ask.</p>
+  </div>
+  <div class="res">
+    <div>
+      <h3>Links</h3>
+      <ul>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/">Clickable prototype</a><span>jessicamanna.github.io/pm-final-project</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/04-roadmap/roadmap.html">Interactive roadmap</a><span>04-roadmap/roadmap.html</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/02-discovery/journey-map.html">Future-state journey map</a><span>02-discovery/journey-map.html</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/assets/nomi-demo.mp4">Prototype demo video</a><span>28 seconds</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project">GitHub repo</a><span>github.com/jessicamanna/pm-final-project</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/final-presentation.html">Course-format presentation</a><span>final-presentation.html</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Course deliverables</h3>
+      <ul>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/01-product-thinking">Problem hook and strategic map</a><span>Module 1</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/02-discovery">AI synthesis, competitive analysis and journey</a><span>Module 2</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/03-analytics">Hypothesis and metrics</a><span>Module 3</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/04-roadmap">Roadmap, PRD and prototype</a><span>Module 4</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/05-experimentation">Experimentation plan</a><span>Module 5</span></li>
+        <li><a href="https://github.com/jessicamanna/pm-final-project/tree/main/06-launch">GTM plan, success dashboard and insights</a><span>Module 6</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Personas and brand</h3>
+      <ul>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/assets/docs/lo-persona-maya-reyes.pdf">Loan officer persona</a><span>Maya Reyes, the Same-Day Closer (PDF)</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/assets/docs/buyer-icp-stacy-c.pdf">Buyer persona and ICP</a><span>Stacy C., the Referral-Growth CMO (PDF)</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/assets/docs/nomi-brand-guidelines.pdf">Brand guidelines</a><span>Identity system v1.0 (PDF)</span></li>
+        <li><a href="https://jessicamanna.github.io/pm-final-project/assets/docs/nomi-voice-messaging-guide.pdf">Voice and messaging guide</a><span>Meet Nomi (PDF)</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Built with</h3>
+      <ul class="tools">
+        <li>Claude</li>
+        <li>GitHub</li>
+        <li>Figma</li>
+        <li>HeyGen</li>
+        <li>Unsplash</li>
+        <li>Mobbin</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div></div>
+
+<nav class="controls" aria-label="Slide controls">
+  <button type="button" id="prev" aria-label="Previous slide">‹</button>
+  <button type="button" id="next" aria-label="Next slide">›</button>
+</nav>
+
+<script>
+(function(){
+  const CHAPTERS=["Problem","Research","Hypothesis","Blueprint","Validation","Launch","Learnings"];
+  const deck=document.getElementById("deck");
+  const slides=[...deck.querySelectorAll(".slide")];
+  slides.forEach((s,k)=>{
+    if(s.dataset.module!==undefined){
+      const rail=document.createElement("div"); rail.className="rail"; rail.setAttribute("aria-hidden","true");
+      const ch=s.dataset.chapter;
+      rail.innerHTML=CHAPTERS.map(c=>`<span class="${c===ch?"on":""}">${c}</span>`).join("")+`<span class="mod">${s.dataset.module}</span>`;
+      s.prepend(rail);
+    }
+    const n=document.createElement("div"); n.className="pageno"; n.textContent=`${k+1} / ${slides.length}`; s.appendChild(n);
+  });
+  let i=0;
+  function fit(){const sc=Math.min(innerWidth/1920,innerHeight/1080);deck.style.transform=`translate(-50%,-50%) scale(${sc})`;}
+  function show(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>{const on=k===i;s.classList.toggle("active",on);s.setAttribute("aria-hidden",String(!on));
+      s.querySelectorAll("video").forEach(v=>{if(on&&v.hasAttribute("data-autoplay")){v.muted=true;v.currentTime=0;const p=v.play();if(p&&p.catch)p.catch(()=>{});}else if(!on)v.pause();});});
+    if(location.hash!=="#"+(i+1)) history.replaceState(null,"","#"+(i+1));
+  }
+  const fromHash=()=>{const m=/^#(\d+)$/.exec(location.hash);return m?parseInt(m[1],10)-1:0;};
+  addEventListener("keydown",e=>{
+    if(e.target.closest&&e.target.closest("input,textarea")) return;
+    if(["ArrowRight","PageDown"," ","Enter"].includes(e.key)){e.preventDefault();show(i+1);}
+    else if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();show(i-1);}
+    else if(e.key==="Home") show(0); else if(e.key==="End") show(slides.length-1);
+    else if(e.key==="f"||e.key==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}
+  });
+  const intro=document.getElementById("intro"), ugc=document.getElementById("ugc");
+  if(intro){
+    const start=()=>{intro.muted=false;const p=intro.play();if(p&&p.catch)p.catch(()=>{});};
+    document.getElementById("playIntro").onclick=start;
+    intro.addEventListener("click",()=>intro.paused?start():intro.pause());
+    intro.addEventListener("play",()=>ugc.classList.add("playing"));
+    intro.addEventListener("pause",()=>ugc.classList.remove("playing"));
+    intro.addEventListener("ended",()=>{ugc.classList.remove("playing");intro.currentTime=0;});
+    addEventListener("keydown",e=>{if((e.key==="p"||e.key==="P")&&slides[i].contains(intro)){intro.paused?start():intro.pause();}});
+  }
+  document.getElementById("next").onclick=()=>show(i+1);
+  document.getElementById("prev").onclick=()=>show(i-1);
+  let tx=null; addEventListener("touchstart",e=>{tx=e.touches[0].clientX},{passive:true});
+  addEventListener("touchend",e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));tx=null;});
+  addEventListener("hashchange",()=>show(fromHash()));
+  addEventListener("resize",fit); fit(); show(fromHash());
+})();
+</script>
+</body>
+</html>
