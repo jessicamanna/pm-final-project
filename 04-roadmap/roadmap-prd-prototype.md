@@ -1,23 +1,20 @@
-# Roadmap, PRD & Prototype
+# Roadmap, PRD & Prototype (Module 4)
 
-> **Module 4 · ★ Deliverable 4.** Repo file `04-roadmap/roadmap-prd-prototype.md` — part of your submission.
-> Do the lab in the **Module 4 · Exercise 1 Guide** (linked from the Module 4 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It becomes the **Roadmap, PRD & Prototype** slide of your Module 6 final deck. (Your Module 4 · Exercise 2 PRD sprint lands in `prd-and-prototype.md`.)
+## Your strategic anchors
+- **Persona (M2), who are you solving for?:** Top-producing retail loan officer (top 20% by units, 26 active partners, 58% of referred purchase applications) whose purchase business depends on realtor and builder referrals.
+- **Primary success metric (M3), your leading indicator:** % of pilot top producers' urgent partner requests (all channels: Nomi briefs, lender queue tickets, weekly LO check-in) answered with a compliance-reviewed asset within 1 business day: from 14% to 60%.
+- **Moment of misery (M2), the specific friction blocking the goal:** A referral partner says "send me something," and the lender's approved path takes about a week (only 14% of top producers' urgent requests arrive on time), so she makes her own unreviewed asset (59%) or sends nothing.
+- **Guardrail metric (M3), what must not drop or break:** Post-delivery compliance issue rate must not rise above today's rate for approved assets, measured by a 10% sampling audit of assets with rates or trigger terms.
 
-## High-level product roadmap
+## Scan the backlog & set a human baseline
+- **My instinctive “quick wins” before touching the AI (2 to 3 feature IDs + why):** Nomi backlog (Option C, 13 items scored; constraints: 2 engineers + 1 designer + a compliance advisor, 90-day pilot with one lender across 2 branches). Instinctive quick wins: N1 Smart chat brief, because the 1.6-day clarification lag is where top producers lose the day; N2 Compliance engine, because the lender's GC holds the veto and nothing ships without it; N3 Product flyer templates, because it is the asset itself.
 
-_Future direction, key milestones, and phased execution over time._
+## Audit, override & decide
+- **Where did you override the AI? (feature + old vs. new score + why):** N2 Compliance engine: the AI baseline described it as catching and fixing non-compliant drafts before delivery (matching the current prototype). I overrode it to "non-compliant drafts are never created": if an LO asks for something non-compliant, Nomi explains the issue and drafts the compliant version from the start, with the adjusted request logged in the audit trail. That is a stronger story for the lender's compliance team. I also added 10% post-delivery sampling of rate and trigger-term assets to N2. N6 Escalation to a JIRA ticket for the lender's legal team: AI said Next (Value 3, Effort 3); I moved it to Later, because email escalation covers the pilot. N9 Live rates (V2/E5) and N10 More asset types (V3/E4): AI scored both as Time Sinkers to cut; I kept them in Later as known future demand. I also cut N7 ("what can I say" guidance) and N8 (partner referral dashboard).
+- **Did the AI over-value a Sales/Eng request your M2 interviews don’t support?:** Not much: the AI scored the Engineering request (N9 live rates) and the Sales request (N10 more asset types) as Time Sinkers. The trap was a buyer request instead: N8, the partner referral dashboard, sounds strategic, but the partner tag plus usage stats cover pilot attribution, so I cut it.
+- **Did it underweight something your M3 cohort/funnel data strongly supports?:** Yes. The original backlog had no way to measure the M3 metric at all. Reading 14% to 60% within 1 business day needs request, partner, product and speed data, so I added N13 Usage stats and put it in Now. I also added N11 LO satisfaction rating (Next), because top-producer attrition (5 of 30 left in 12 months, 3 citing marketing support) makes their satisfaction a business metric, and N12 Auto-archive for state audits with metadata retention (Next).
 
-_____
-
-## PRD snippets
-
-_The key elements of your simplified PRD._
-
-_____
-
-## Wireframes / prototype
-
-_A visual or interactive model of your proposed solution._
-
-_[screenshot or link to your prototype]_
+## Generate your interactive roadmap
+- **My “Now” lane (this sprint), the 2 to 3 quick wins I’ll build first:** Quick wins: N1 Smart chat brief with the partner tag folded in (V5/E2), N3 Product flyer templates in the lender's brand and voice (V4/E2), and N13 Usage stats (V4/E2). Plus one Major Project pulled into Now: N2 Compliance engine (V5/E4), because the lender's compliance team and GC hold the veto. Next: N4 LO personal brand, N5 Co-branding, N11 LO satisfaction rating, N12 Auto-archive for state audits. Later: N6 JIRA escalation, N9 Live rates, N10 More asset types.
+- **What I cut, and the “no” I’m protecting the scope from:** Cut: N7 "What can I say" guidance (new LOs are the second segment) and N8 Partner referral dashboard (the partner tag plus usage stats cover pilot attribution). The "no" I'm protecting is scope creep into a marketing platform: no new asset types, live rates, or buyer dashboards until the flyer proves top producers will bring urgent requests into a compliant path.
+- **Prototype/roadmap screenshot link (paste into your deliverables):** Clickable roadmap: 04-roadmap/roadmap.html · Screenshot: 04-roadmap/roadmap.png (in the project repo)

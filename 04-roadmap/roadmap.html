@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nomi Roadmap</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#16191f;--muted:#5d6573;--line:#e3e6eb;--accent:#2f5bea;--accent-soft:#e8eefd;--cut:#b42318;--cut-soft:#fdecea}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#171a21;--ink:#e9ecf1;--muted:#9aa3b2;--line:#2a2f3a;--accent:#7c9cff;--accent-soft:#1d2540;--cut:#ff8a80;--cut-soft:#3a1d1d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 40px}
+h1{margin:0 0 4px;font-size:24px}
+.sub{color:var(--muted);margin:0 0 18px}
+.anchors{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:22px}
+.anchor{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px}
+.anchor b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.lane{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.lane h2{margin:0;font-size:15px;display:flex;justify-content:space-between;align-items:baseline}
+.lane h2 small{font-weight:400;color:var(--muted);font-size:12px}
+.lane.now{border-top:4px solid var(--accent)}
+.lane.cut{border-top:4px solid var(--cut)}
+.lane .hint{color:var(--muted);font-size:12px;margin:2px 0 10px}
+.item{width:100%;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px;margin-bottom:8px;cursor:pointer;color:inherit;font:inherit}
+.item:hover,.item[aria-expanded=true]{border-color:var(--accent)}
+.now .item{background:var(--accent-soft)}
+.cut .item{background:var(--cut-soft)}
+.cut .item .name{text-decoration:line-through;text-decoration-color:var(--cut)}
+.top{display:flex;justify-content:space-between;gap:8px}
+.name{font-weight:600;font-size:14px}
+.tag{font-size:11px;color:var(--muted);white-space:nowrap}
+.score{font-size:12px;color:var(--muted);margin-top:2px}
+.detail{display:none;font-size:13px;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.item[aria-expanded=true] .detail{display:block}
+.legend{margin-top:20px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Nomi · Now / Next / Later Roadmap</h1>
+<p class="sub">Pilot: one lender, 2 branches, 90 days · 2 engineers + 1 designer + a compliance advisor · Click any feature for details.</p>
+<div class="anchors">
+<div class="anchor"><b>Persona</b>Top-producing retail LO (top 20%, 26 partners, 58% of referred applications)</div>
+<div class="anchor"><b>Primary metric</b>Urgent partner requests answered with a reviewed asset within 1 business day: 14% → 60%</div>
+<div class="anchor"><b>Moment of misery</b>"Send me something" — the approved path takes about a week, so she goes DIY or sends nothing</div>
+<div class="anchor"><b>Guardrail</b>Post-delivery compliance issue rate must not rise (10% sampling audit)</div>
+</div>
+<div class="lanes" id="lanes"></div>
+<p class="legend">V = Value (lift on the primary metric or guardrail), E = Effort, both 1–5. Quick Win = V ≥ 4 and E ≤ 2.</p>
+</div>
+<script>
+const F=[
+["now","N1","Smart chat brief + partner tag",5,2,"Quick Win","Captures partner, program and needed-by date in one conversation, asks about objective, audience and call to action, and asks whether to save a preference for all materials or just this partner. Removes the 1.6-day clarification lag. The partner tag drives attribution."],
+["now","N3","Product flyer templates",4,2,"Quick Win","On-brand flyer templates in the lender's brand and voice guidelines, customized to the LO. The asset the pilot delivers."],
+["now","N13","Usage stats",4,2,"Quick Win","Requestor, partner, product, material, personalization, speed and satisfaction. Without it, the 14% → 60% metric can't be measured."],
+["now","N2","Compliance engine",5,4,"Major Project","Checks against policy docs, T&Cs, standard disclaimers and a prebuilt ruleset. Non-compliant drafts are never created: Nomi explains the issue and drafts the compliant version. Audit trail, escalation, and 10% post-delivery sampling of rate and trigger-term assets for six months. Pulled into Now because the lender's GC holds the veto."],
+["next","N4","LO personal brand",3,2,"Fill-In","Sub-brand or team name, vanity domain and saved preferences applied automatically. Fights \"Agents notice.\""],
+["next","N5","Partner co-branding",4,3,"Major Project","Applies the realtor's or builder's branding and preferences. Adds a partner approval step."],
+["next","N11","LO satisfaction rating",3,1,"Fill-In","Rating and comments at the end of each request. Tracks top-producer morale, a top-3 exit reason."],
+["next","N12","Audit archive with retention",4,3,"Major Project","Auto-archiving for state audits with metadata retention. N2's audit trail covers the pilot."],
+["later","N6","Escalation → JIRA ticket",3,3,"Time Sinker","Creates a ticket for the lender's legal team. Email escalation covers the pilot."],
+["later","N9","Live rate / pricing feed",2,5,"Time Sinker","Pulls live rates into the flyer. Most product flyers carry no rate."],
+["later","N10","More asset types",3,4,"Time Sinker","Social video, email, print ads. Flyer first."],
+["cut","N7","\"What can I say\" guidance",2,2,"Fill-In","New LOs are the second segment."],
+["cut","N8","Partner referral dashboard",3,4,"Time Sinker","The partner tag plus usage stats cover pilot attribution."]];
+const L=[["now","Now","90-day pilot","The quick wins, plus the compliance engine"],["next","Next","following 1–2 sprints","Big bets once the flyer path works"],["later","Later","backlog","Known demand, not yet earned"],["cut","✂ Cut list","","The no I'm protecting"]];
+const root=document.getElementById("lanes");
+L.forEach(([k,t,s,h])=>{const d=document.createElement("section");d.className="lane "+k;d.innerHTML=`<h2>${t}<small>${s}</small></h2><p class="hint">${h}</p>`;
+F.filter(f=>f[0]===k).forEach(f=>{const b=document.createElement("button");b.className="item";b.setAttribute("aria-expanded","false");
+b.innerHTML=`<div class="top"><span class="name">${f[1]} · ${f[2]}</span><span class="tag">${f[5]}</span></div><div class="score">V ${f[3]} · E ${f[4]}</div><div class="detail">${f[6]}</div>`;
+b.onclick=()=>b.setAttribute("aria-expanded",b.getAttribute("aria-expanded")==="true"?"false":"true");d.appendChild(b);});root.appendChild(d);});
+</script>
+</body>
+</html>
