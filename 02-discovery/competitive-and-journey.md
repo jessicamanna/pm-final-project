@@ -3,7 +3,7 @@
 ## Responses
 - **Role, who are you solving for? (the specific user segment or profile):** A top-producing retail LO (top 20% by units, ~26 active referral partners) whose purchase business depends on realtor and builder referrals.
 - **Goal, what is this user ultimately trying to achieve?:** Respond to a partner's "send me something" within a day with polished, compliant material that looks like hers, so she wins the partner's next referral.
-- **Friction, the main barrier (moment of misery) stopping them from succeeding:** When a partner request can't be planned, the approved queue takes a median of 6.5 business days, and only 19% of urgent requests arrive on time. So she skips the process. Dana pays an assistant to make Canva flyers that skip compliance, and Rosa lost Ridgeview Homes to another lender after a co-branded flyer arrived too late.
+- **Friction, the main barrier (moment of misery) stopping them from succeeding:** When a partner request can't be planned, the approved queue takes a median of 6.5 business days, and only 14% of top producers' urgent requests arrive on time. So she skips the process. Dana pays an assistant to make Canva flyers that skip compliance, and Rosa lost Ridgeview Homes to another lender after a co-branded flyer arrived too late.
 - **External tools, the outside platforms or tools the user is forced to use:** Canva, ChatGPT or another generic AI tool, the logo copied from the lender's website, a personally paid assistant or freelancer, and text or email to deliver the piece.
 - **The process, the 3 to 5 manual steps the user takes to get the job done:** 1. A partner asks for something, and she judges the queue too slow to meet the deadline.
 2. She or her assistant drafts copy, often in ChatGPT.
