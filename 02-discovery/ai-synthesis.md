@@ -1,12 +1,12 @@
 # AI Synthesis, Product Health & Insights Summary (Module 2)
 
 ## Responses
-- **Moment of misery / red flag #1 (e.g., “user gave up after 3 tries”):** Top producer Dana R. (P1) stopped submitting tickets in 2024 ("Eight days for a flyer isn't a process, it's a punishment") and now pays an assistant out of pocket to make flyers in Canva, outside compliance review and possibly without an NMLS ID. (Simulated)
-- **Moment of misery / red flag #2:** Rosa M. (P5) asked on Tuesday for a buydown flyer for Ridgeview Homes' Saturday grand opening and got it the following Monday. The builder printed its own without her, and its sales office now hands out another lender's card. (Simulated)
-- **Moment of misery / red flag #3:** New LO Priya S. (P3) promised an agent a one-pager and never sent it, because she didn't know what she could say about rates and her only ticket had taken nine days. (Simulated)
+- **Moment of misery / red flag #1 (e.g., “user gave up after 3 tries”):** Top producer Dana R. (P1) stopped submitting tickets in 2024 ("Eight days for a flyer isn't a process, it's a punishment") and now pays an assistant out of pocket to make flyers in Canva, outside compliance review and possibly without an NMLS ID.
+- **Moment of misery / red flag #2:** Rosa M. (P5) asked on Tuesday for a buydown flyer for Ridgeview Homes' Saturday grand opening and got it the following Monday. The builder printed its own without her, and its sales office now hands out another lender's card.
+- **Moment of misery / red flag #3:** New LO Priya S. (P3) promised an agent a one-pager and never sent it, because she didn't know what she could say about rates and her only ticket had taken nine days.
 - **Product Health & Insights Summary (Claude's output):** Product Health & Insights Summary: Retail LO Collateral Process
 
-Source: Harborline Home Lending discovery dataset, Sept 8 – Oct 2, 2026 (simulated course data). Inputs: request-queue export (n=914), shadow-asset audit (n=240), CRM referral baseline, LO survey (n=94), 9 interviews, Slack channel excerpts.
+Source: Harborline Home Lending discovery dataset, Sept 8 – Oct 2, 2026. Inputs: request-queue export (n=914), shadow-asset audit (n=240), CRM referral baseline, LO survey (n=94), 9 interviews, Slack channel excerpts.
 
 Executive Summary
 
