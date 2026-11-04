@@ -664,6 +664,7 @@
   .f3 { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; min-height: 18px; }
   .f3 span { font-size: 10px; font-weight: 650; background: var(--line-2); color: var(--ink-2); border-radius: 99px; padding: 2px 7px; }
   .f3 span.hot { background: #FFE6DE; color: var(--navy); }
+  .ib.on { color: var(--accent); background: var(--accent-tint); }
   .ibar { display: flex; justify-content: space-between; padding: 4px 6px 8px; margin-top: auto; }
   .ib { position: relative; width: 32px; height: 32px; border: 0; background: none; border-radius: 9px; color: var(--slate, #56677A); display: grid; place-items: center; cursor: pointer; }
   .ib:hover, .ib:focus-visible { background: #E3EAF0; color: var(--navy); }
@@ -1657,7 +1658,7 @@ function median(a) { const s = [...a].sort((x, y) => x - y); const m = s.length 
 function renderLender() {
   const all = ASSETS, mine = all.filter(a => a.isNew).length;
   const adjPct = Math.round(100 * all.filter(a => a.adj.length).length / all.length);
-  const list = all.filter(a => LV.filter === 'all' || (LV.filter === 'adj' && a.adj.length) || (LV.filter === 'urgent' && a.urgent) || (LV.filter === 'sampled' && a.sampled));
+  const list = all.filter(a => !(LV.arch || {})[a.id]).filter(a => LV.filter === 'all' || (LV.filter === 'adj' && a.adj.length) || (LV.filter === 'urgent' && a.urgent) || (LV.filter === 'sampled' && a.sampled));
   const urgentRate = 57;
   return `
     <h2>Harbor Lane · pilot</h2>
@@ -1679,7 +1680,7 @@ function renderLender() {
       ${[['all', 'All'], ['urgent', 'Urgent'], ['adj', 'Adjusted'], ['sampled', 'Sampled']].map(([k, l]) => `<button aria-pressed="${LV.filter === k}" data-action="lfilter" data-id="${k}">${l}</button>`).join('')}
     </div>
     <div class="assets">
-      ${list.length ? list.map(assetHTML).join('') : '<div class="empty">No assets match this filter.</div>'}
+      ${list.length ? list.map(a => assetHTML(a)).join('') : '<div class="empty">No assets match this filter.</div>'}
     </div>
     <p class="hint" style="margin-top:12px">Referred applications from tagged partners are the lagging North Star, read after the pilot. A purchase loan can take 164 days from lead to funding.</p>`;
 }
@@ -1691,7 +1692,7 @@ function assetHTML(a, mine) {
       <div style="min-width:0">
         <div class="a1">${esc(a.program)} → ${esc(a.partner)}</div>
         <div class="a2">${esc(a.lo)} · ${when}</div>
-        <div class="a3"><span class="pill ok">Reviewed</span>${a.urgent ? '<span class="pill">Urgent</span>' : ''}${a.adj.length ? `<span class="pill acc">${a.adj.length} adjusted</span>` : ''}${a.sampled ? '<span class="pill">Sampled</span>' : ''}${a.isNew ? '<span class="pill acc">Just now</span>' : ''}</div>
+        <div class="a3">${mine ? '<span class="pill ok">Reviewed</span>' : ((LV.st || {})[a.id] === 'flagged' ? '<span class="pill acc">Flagged</span>' : '<span class="pill ok">Approved</span>')}${a.urgent ? '<span class="pill">Urgent</span>' : ''}${a.adj.length ? `<span class="pill acc">${a.adj.length} adjusted</span>` : ''}${a.sampled ? '<span class="pill">Sampled</span>' : ''}${a.isNew ? '<span class="pill acc">Just now</span>' : ''}</div>
         ${a.funded ? `<div class="funded">${CONFETTI}<span><b>Funded ${a.funded.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.</b> ${esc(a.partner.split(' ')[0])} referred a buyer after this flyer went out, and the loan just funded.</span></div>` : ''}
       </div>
       <div class="el"><b>${fmtElapsed(a.sec * 1000)}</b>brief → reviewed</div>
@@ -1701,6 +1702,7 @@ function assetHTML(a, mine) {
       time: a.at.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
       stamp: a.at.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }),
       checks: '6 of 6 passed. Draft violations: 0.', adj: a.adj, sampled: a.sampled }) : ''}
+    ${mine ? '' : lenderBar(a)}
     ${mine ? `<div class="fa-row">
       <button class="fa" data-action="fa-again" data-id="${a.id}">${I.pdf}Download again</button>
       <button class="fa" data-action="fa-edit" data-id="${a.id}">${I.spark}Download with edits</button>
@@ -1719,7 +1721,16 @@ const IC = {
   edit: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4.5 15.5 7.5 7 16H4v-3Z"/><path d="m11 6 3 3"/></svg>',
   resize: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="9" height="11" rx="1.5"/><path d="M8 3h7.5a1.5 1.5 0 0 1 1.5 1.5V12"/></svg>',
   share: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14.5" cy="5" r="2"/><circle cx="5.5" cy="10" r="2"/><circle cx="14.5" cy="15" r="2"/><path d="m7.3 9 5.4-3M7.3 11l5.4 3"/></svg>',
+  eye: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-5.5 8-5.5S18 10 18 10s-3 5.5-8 5.5S2 10 2 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>',
+  archive: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="4" rx="1"/><path d="M4.5 8v7a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V8M8 11h4"/></svg>',
+  ok: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="m7 10.2 2 2 4-4.4"/></svg>',
+  flag: '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17V3.5M5 4h9l-2 3.5 2 3.5H5"/></svg>',
 };
+function lenderBar(a) {
+  const st = (LV.st || {})[a.id] || 'approved';
+  const b = (act, tip, ic, on) => `<button class="ib${on ? ' on' : ''}" data-action="${act}" data-id="${a.id}" data-tip="${tip}" aria-label="${tip}"${on !== undefined ? ` aria-pressed="${!!on}"` : ''}>${ic}</button>`;
+  return `<div class="ibar">${b('lopen', 'Preview', IC.eye)}${b('fa-again', 'Download', IC.dl)}${b('l-archive', 'Archive', IC.archive)}${b('l-approve', 'Compliance: approved', IC.ok, st === 'approved')}${b('l-flag', 'Compliance: flagged', IC.flag, st === 'flagged')}</div>`;
+}
 function iconBar(a) {
   return `<div class="ibar">
     <button class="ib" data-action="fa-again" data-id="${a.id}" data-tip="Download again" aria-label="Download again">${IC.dl}</button>
@@ -2052,6 +2063,9 @@ document.addEventListener('click', e => {
     case 'fa-share': toast(`Link copied: nomi.example/s/${id.slice(-4).toLowerCase()} (simulated)`); break;
     case 'rp': { const pt = PARTNERS.find(p => p.id === id); const i = $('#input'); if (i && pt) { i.value = `${pt.name.split(' ')[0]} needs `; i.focus(); i.setSelectionRange(i.value.length, i.value.length); } break; }
     case 'lfilter': LV.filter = id; render(); break;
+    case 'l-archive': LV.arch = { ...(LV.arch || {}), [id]: 1 }; render(); toast('Archived. It stays in the audit trail (simulated).'); break;
+    case 'l-approve': LV.st = { ...(LV.st || {}), [id]: 'approved' }; render(); toast('Marked approved by the lender’s compliance team (simulated).'); break;
+    case 'l-flag': LV.st = { ...(LV.st || {}), [id]: 'flagged' }; render(); toast('Flagged for the lender’s compliance team to review (simulated).'); break;
     case 'lopen': LV.open = LV.open === id ? null : id; render(); break;
   }
 });
