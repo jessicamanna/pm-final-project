@@ -401,8 +401,8 @@ body:hover .controls,.controls:focus-within{opacity:1}
   <p class="by">Jessica Manna<span>Product Management Foundations, final project</span></p>
   <p class="tag">Ready when they ask.</p>
   <div class="ugc" id="ugc">
-    <video id="intro" src="../assets/nomi-intro.mp4" poster="../assets/nomi-intro-poster.jpg" playsinline preload="metadata" aria-label="Jessica's 66-second intro to Nomi"></video>
-    <button class="play" type="button" id="playIntro" aria-label="Play Jessica's intro video, 1 minute 6 seconds"><i></i>Play intro · 1:06</button>
+    <video id="intro" data-autoplay muted loop src="../assets/nomi-intro.mp4" poster="../assets/nomi-intro-poster.jpg" playsinline preload="auto" aria-label="Jessica's 66-second intro to Nomi"></video>
+    <button class="play" type="button" id="playIntro" aria-label="Play Jessica's intro video, 1 minute 6 seconds"><i></i>Play with sound · 1:06</button>
   </div>
   <span class="signal ugc-dot" aria-hidden="true"></span>
 </section>
@@ -893,13 +893,13 @@ body:hover .controls,.controls:focus-within{opacity:1}
   });
   const intro=document.getElementById("intro"), ugc=document.getElementById("ugc");
   if(intro){
-    const start=()=>{intro.muted=false;const p=intro.play();if(p&&p.catch)p.catch(()=>{});};
+    const start=()=>{intro.currentTime=0;intro.muted=false;const p=intro.play();if(p&&p.catch)p.catch(()=>{});};
     document.getElementById("playIntro").onclick=start;
-    intro.addEventListener("click",()=>intro.paused?start():intro.pause());
-    intro.addEventListener("play",()=>ugc.classList.add("playing"));
+    intro.addEventListener("click",()=>(intro.paused||intro.muted)?start():intro.pause());
+    intro.addEventListener("play",()=>{if(!intro.muted)ugc.classList.add("playing");});
     intro.addEventListener("pause",()=>ugc.classList.remove("playing"));
     intro.addEventListener("ended",()=>{ugc.classList.remove("playing");intro.currentTime=0;});
-    addEventListener("keydown",e=>{if((e.key==="p"||e.key==="P")&&slides[i].contains(intro)){intro.paused?start():intro.pause();}});
+    addEventListener("keydown",e=>{if((e.key==="p"||e.key==="P")&&slides[i].contains(intro)){(intro.paused||intro.muted)?start():intro.pause();}});
   }
   const demo=document.querySelector("#proto video");
   const watch=e=>{e.preventDefault();demo.currentTime=0;demo.controls=true;demo.play();const f=demo.requestFullscreen||demo.webkitRequestFullscreen||demo.webkitEnterFullscreen;if(f)f.call(demo);};
