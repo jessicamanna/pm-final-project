@@ -1,17 +1,23 @@
-# Hypothesis & Success Metrics
+# Data-Backed Hypothesis, Module 3
 
-> **Module 3 · ★ Deliverable 3.** Repo file `03-analytics/hypothesis-and-metrics.md` — part of your submission.
-> Do the lab in the **Module 3 · Exercise Guide** (linked from the Module 3 deck), then click **⬇ Download .md** — it saves as this exact file. Commit it here.
-> It feeds the **Problem, Value & Hypothesis** slide of your Module 6 final deck.
+- **Scenario:** My own initiative
+- **Bet type:** Optimizing the existing
 
-## Finalized product hypothesis
+## The hypothesis
+> Based on only 14% of top producers' urgent requests arriving on time, and 59% of them making their own unreviewed asset instead, we believe that solving the slow urgent-request path for top-producing loan officers will result in urgent partner requests moving back into a compliant path, protecting the lender's referral relationships and LO retention, as measured by an increase from 14% to 60% in urgent partner requests answered with a reviewed asset within 1 business day. We will protect the post-delivery compliance issue rate and make a go/no-go decision after a 90-day staggered rollout.
 
-> Based on [qual + quant evidence], I believe that [solving X] for [persona] will result in [outcome], as measured by a [X%] change in [success metric]. I will protect [guardrail metric] and make a go/no-go decision after [decision window].
+## Evidence
+- **Qualitative (M2):** "Eight days for a flyer isn't a process, it's a punishment." Dana, a top producer, stopped submitting tickets and pays an assistant out of pocket for Canva flyers that skip compliance. Rosa lost Ridgeview Homes after a co-branded flyer arrived the Monday after the Saturday event.
+- **Quantitative (M3):** only 14% of top producers' urgent requests arriving on time, and 59% of them making their own unreviewed asset instead
 
-## Success metrics
+## Persona & problem
+- **Role:** top-producing loan officers
+- **Goal:** answer a referral partner's "send me something" within a day with polished, compliant material that looks like hers
+- **Friction:** the lender's urgent request path fails her (14% on time), so she makes her own unreviewed assets or sends nothing
+- **Problem you are solving:** the slow urgent-request path
 
-| Metric | Type | Target | Why it matters |
-|---|---|---|---|
-| _North-star_ | | _____ | _____ |
-| _Leading indicator_ | | _____ | _____ |
-| _Guardrail_ | | _____ | _____ |
+## Outcome & metrics
+- **Strategic outcome:** urgent partner requests moving back into a compliant path, protecting the lender's referral relationships and LO retention
+- **Primary success metric:** an increase from 14% to 60% in urgent partner requests answered with a reviewed asset within 1 business day
+- **Guardrail metric:** the post-delivery compliance issue rate
+- **Decision window:** a 90-day staggered rollout
