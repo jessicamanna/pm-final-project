@@ -1822,6 +1822,7 @@ function renderPartners() {
     <input class="tinput psearch" id="p-q" placeholder="Search partners" value="${esc(PV.q)}" aria-label="Search partners">
     <div class="filters">${[['all', 'All'], ['agents', 'Agents'], ['builders', 'Builders'], ['other', 'CPA & attorney']].map(([k, l]) => `<button aria-pressed="${PV.type === k}" data-action="p-type" data-id="${k}">${l}</button>`).join('')}</div>
     <div class="psort">${[['referrals', 'Most referrals'], ['funded', 'Most funded'], ['newest', 'Newest'], ['attention', 'Needs attention'], ['az', 'A–Z']].map(([k, l]) => `<button aria-pressed="${PV.sort === k}" data-action="p-sort" data-id="${k}">${l}</button>`).join('')}</div>
+    <div class="pcount" style="font-size:13px;color:var(--ink-2);margin:2px 0 8px">Showing <b>${list.length}</b> ${{all:'partners',agents:'agents',builders:'builders',other:'CPAs and attorneys'}[PV.type]} of ${n} partners${PV.q ? ` matching “${esc(PV.q)}”` : ""}</div>
     <div class="plist">${list.map(p => { const [w, lvl] = warmth(p), open = PV.open === p.id; return `<div class="pcard ${open ? 'open' : ''}">
       <button class="prow2" data-action="p-open" data-id="${p.id}" aria-expanded="${open}">
         ${pAvatar(p)}
